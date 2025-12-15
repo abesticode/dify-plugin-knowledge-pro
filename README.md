@@ -7,7 +7,7 @@
 **Author:** abesticode  
 **Version:** 0.0.1  
 **Type:** tool
-**Repo:** https://github.com/abesticode/knowledge_pro
+**Repo:** https://github.com/abesticode/dify-plugin-knowledge-pro
 
 
 ## Description
@@ -286,7 +286,7 @@ The plugin provides descriptive error messages for common issues:
 
 ## Support
 
-For issues and feature requests, please contact [abesticode](https://github.com/abesticode/knowledge_pro).
+For issues and feature requests, please contact [abesticode](https://github.com/abesticode/dify-plugin-knowledge-pro).
 
 ## License
 
