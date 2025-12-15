@@ -1,0 +1,49 @@
+identity:
+  name: get_indexing_status
+  author: abesticode
+  label:
+    en_US: Get Indexing Status
+    zh_Hans: 获取索引状态
+    pt_BR: Obter Status de Indexação
+    ja_JP: インデックス状態取得
+description:
+  human:
+    en_US: Get the document embedding/indexing status in a Dify knowledge base
+    zh_Hans: 获取Dify知识库中文档的嵌入/索引状态
+    pt_BR: Obter o status de embedding/indexação do documento em uma base de conhecimento Dify
+    ja_JP: Difyナレッジベース内のドキュメントのエンベディング/インデックス状態を取得します
+  llm: Retrieves the document embedding/indexing progress. Use the batch ID returned when creating a document to track its indexing status. Returns progress information including completed segments and total segments.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset containing the document
+      zh_Hans: 包含文档的数据集ID
+      pt_BR: O ID do dataset contendo o documento
+      ja_JP: ドキュメントを含むデータセットのID
+    llm_description: The unique identifier (ID) of the dataset containing the document.
+    form: llm
+  - name: batch
+    type: string
+    required: true
+    label:
+      en_US: Batch ID
+      zh_Hans: 批次ID
+      pt_BR: ID do Lote
+      ja_JP: バッチID
+    human_description:
+      en_US: The batch ID from document creation
+      zh_Hans: 文档创建时返回的批次ID
+      pt_BR: O ID do lote retornado na criação do documento
+      ja_JP: ドキュメント作成時に返されたバッチID
+    llm_description: The batch ID that was returned when the document was created. This is used to track the indexing progress.
+    form: llm
+extra:
+  python:
+    source: tools/get_indexing_status.py

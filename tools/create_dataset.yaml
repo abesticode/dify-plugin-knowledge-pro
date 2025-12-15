@@ -1,0 +1,63 @@
+identity:
+  name: create_dataset
+  author: abesticode
+  label:
+    en_US: Create Dataset
+    zh_Hans: 创建数据集
+    pt_BR: Criar Dataset
+    ja_JP: データセット作成
+description:
+  human:
+    en_US: Create a new empty knowledge base (dataset) in Dify
+    zh_Hans: 在Dify中创建新的空知识库（数据集）
+    pt_BR: Criar uma nova base de conhecimento vazia (dataset) no Dify
+    ja_JP: Difyで新しい空のナレッジベース（データセット）を作成します
+  llm: Creates a new empty knowledge base (dataset) in Dify. Returns the created dataset information including ID, name, and timestamps. Use this to initialize a new knowledge base before adding documents.
+parameters:
+  - name: name
+    type: string
+    required: true
+    label:
+      en_US: Dataset Name
+      zh_Hans: 数据集名称
+      pt_BR: Nome do Dataset
+      ja_JP: データセット名
+    human_description:
+      en_US: The name for the new knowledge base
+      zh_Hans: 新知识库的名称
+      pt_BR: O nome para a nova base de conhecimento
+      ja_JP: 新しいナレッジベースの名前
+    llm_description: The name for the new knowledge base. This should be a descriptive name that identifies the content or purpose of the dataset.
+    form: llm
+  - name: permission
+    type: select
+    required: false
+    default: only_me
+    label:
+      en_US: Permission
+      zh_Hans: 权限
+      pt_BR: Permissão
+      ja_JP: 権限
+    human_description:
+      en_US: Who can access this knowledge base
+      zh_Hans: 谁可以访问此知识库
+      pt_BR: Quem pode acessar esta base de conhecimento
+      ja_JP: このナレッジベースにアクセスできる人
+    llm_description: Permission setting for the knowledge base. "only_me" restricts access to the owner, while "all_team_members" allows team access.
+    form: llm
+    options:
+      - value: only_me
+        label:
+          en_US: Only Me
+          zh_Hans: 仅自己
+          pt_BR: Apenas Eu
+          ja_JP: 自分のみ
+      - value: all_team_members
+        label:
+          en_US: All Team Members
+          zh_Hans: 所有团队成员
+          pt_BR: Todos os Membros da Equipe
+          ja_JP: チーム全員
+extra:
+  python:
+    source: tools/create_dataset.py

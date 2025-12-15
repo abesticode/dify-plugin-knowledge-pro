@@ -1,0 +1,64 @@
+identity:
+  name: update_metadata_field
+  author: abesticode
+  label:
+    en_US: Update Metadata Field
+    zh_Hans: 更新元数据字段
+    pt_BR: Atualizar Campo de Metadados
+    ja_JP: メタデータフィールド更新
+description:
+  human:
+    en_US: Update a metadata field in a Dify knowledge base
+    zh_Hans: 更新Dify知识库中的元数据字段
+    pt_BR: Atualizar um campo de metadados em uma base de conhecimento Dify
+    ja_JP: Difyナレッジベース内のメタデータフィールドを更新します
+  llm: Updates the name of an existing metadata field in a knowledge base. Use list_metadata to get the metadata_id.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset containing the metadata field
+      zh_Hans: 包含元数据字段的数据集ID
+      pt_BR: O ID do dataset contendo o campo de metadados
+      ja_JP: メタデータフィールドを含むデータセットのID
+    llm_description: The unique identifier (ID) of the dataset containing the metadata field.
+    form: llm
+  - name: metadata_id
+    type: string
+    required: true
+    label:
+      en_US: Metadata ID
+      zh_Hans: 元数据ID
+      pt_BR: ID do Metadados
+      ja_JP: メタデータID
+    human_description:
+      en_US: The ID of the metadata field to update
+      zh_Hans: 要更新的元数据字段ID
+      pt_BR: O ID do campo de metadados a ser atualizado
+      ja_JP: 更新するメタデータフィールドのID
+    llm_description: The unique identifier (ID) of the metadata field to update. Use list_metadata to get available metadata IDs.
+    form: llm
+  - name: name
+    type: string
+    required: true
+    label:
+      en_US: New Field Name
+      zh_Hans: 新字段名称
+      pt_BR: Novo Nome do Campo
+      ja_JP: 新しいフィールド名
+    human_description:
+      en_US: The new name for the metadata field
+      zh_Hans: 元数据字段的新名称
+      pt_BR: O novo nome para o campo de metadados
+      ja_JP: メタデータフィールドの新しい名前
+    llm_description: The new name for the metadata field.
+    form: llm
+extra:
+  python:
+    source: tools/update_metadata_field.py

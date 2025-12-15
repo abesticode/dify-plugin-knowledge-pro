@@ -1,0 +1,124 @@
+identity:
+  name: update_chunk
+  author: abesticode
+  label:
+    en_US: Update Chunk
+    zh_Hans: 更新分块
+    pt_BR: Atualizar Chunk
+    ja_JP: チャンク更新
+description:
+  human:
+    en_US: Update a chunk (segment) in a document in a Dify knowledge base
+    zh_Hans: 更新Dify知识库中文档的分块（段落）
+    pt_BR: Atualizar um chunk (segmento) em um documento em uma base de conhecimento Dify
+    ja_JP: Difyナレッジベース内のドキュメントのチャンク（セグメント）を更新します
+  llm: Updates an existing chunk (segment) in a document. You can update the content, answer, keywords, or enable/disable the chunk. Use list_chunks to get the segment_id.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset containing the document
+      zh_Hans: 包含文档的数据集ID
+      pt_BR: O ID do dataset contendo o documento
+      ja_JP: ドキュメントを含むデータセットのID
+    llm_description: The unique identifier (ID) of the dataset containing the document.
+    form: llm
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+      zh_Hans: 文档ID
+      pt_BR: ID do Documento
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: The ID of the document containing the chunk
+      zh_Hans: 包含分块的文档ID
+      pt_BR: O ID do documento contendo o chunk
+      ja_JP: チャンクを含むドキュメントのID
+    llm_description: The unique identifier (ID) of the document containing the chunk.
+    form: llm
+  - name: segment_id
+    type: string
+    required: true
+    label:
+      en_US: Segment ID
+      zh_Hans: 段落ID
+      pt_BR: ID do Segmento
+      ja_JP: セグメントID
+    human_description:
+      en_US: The ID of the chunk/segment to update
+      zh_Hans: 要更新的分块/段落ID
+      pt_BR: O ID do chunk/segmento a ser atualizado
+      ja_JP: 更新するチャンク/セグメントのID
+    llm_description: The unique identifier (ID) of the chunk/segment to update. Use list_chunks to get available segment IDs.
+    form: llm
+  - name: content
+    type: string
+    required: false
+    label:
+      en_US: New Content
+      zh_Hans: 新内容
+      pt_BR: Novo Conteúdo
+      ja_JP: 新しいコンテンツ
+    human_description:
+      en_US: The new content for the chunk (optional)
+      zh_Hans: 分块的新内容（可选）
+      pt_BR: O novo conteúdo para o chunk (opcional)
+      ja_JP: チャンクの新しいコンテンツ（オプション）
+    llm_description: The new text content for the chunk. Leave empty to keep existing content.
+    form: llm
+  - name: answer
+    type: string
+    required: false
+    label:
+      en_US: New Answer
+      zh_Hans: 新答案
+      pt_BR: Nova Resposta
+      ja_JP: 新しい回答
+    human_description:
+      en_US: The new answer for the chunk (optional)
+      zh_Hans: 分块的新答案（可选）
+      pt_BR: A nova resposta para o chunk (opcional)
+      ja_JP: チャンクの新しい回答（オプション）
+    llm_description: The new answer for Q&A mode. Leave empty to keep existing answer.
+    form: llm
+  - name: keywords
+    type: string
+    required: false
+    label:
+      en_US: New Keywords
+      zh_Hans: 新关键词
+      pt_BR: Novas Palavras-chave
+      ja_JP: 新しいキーワード
+    human_description:
+      en_US: New comma-separated keywords (optional)
+      zh_Hans: 新的关键词，用逗号分隔（可选）
+      pt_BR: Novas palavras-chave separadas por vírgula (opcional)
+      ja_JP: 新しいキーワード、カンマ区切り（オプション）
+    llm_description: New comma-separated keywords for the chunk. Leave empty to keep existing keywords.
+    form: llm
+  - name: enabled
+    type: boolean
+    required: false
+    label:
+      en_US: Enabled
+      zh_Hans: 启用
+      pt_BR: Habilitado
+      ja_JP: 有効
+    human_description:
+      en_US: Whether the chunk is enabled for retrieval (optional)
+      zh_Hans: 分块是否启用检索（可选）
+      pt_BR: Se o chunk está habilitado para recuperação (opcional)
+      ja_JP: チャンクが検索に有効かどうか（オプション）
+    llm_description: Set to true to enable or false to disable the chunk for retrieval. Leave unset to keep current state.
+    form: llm
+extra:
+  python:
+    source: tools/update_chunk.py

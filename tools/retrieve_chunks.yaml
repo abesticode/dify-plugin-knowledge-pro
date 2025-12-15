@@ -1,0 +1,137 @@
+identity:
+  name: retrieve_chunks
+  author: abesticode
+  label:
+    en_US: Retrieve Chunks
+    zh_Hans: 检索分块
+    pt_BR: Recuperar Chunks
+    ja_JP: チャンク検索
+description:
+  human:
+    en_US: Search and retrieve chunks from a Dify knowledge base
+    zh_Hans: 从Dify知识库搜索和检索分块
+    pt_BR: Pesquisar e recuperar chunks de uma base de conhecimento Dify
+    ja_JP: Difyナレッジベースからチャンクを検索・取得します
+  llm: Searches a knowledge base and retrieves matching chunks based on a query. Supports different search methods including keyword search, semantic search, and hybrid search. Returns relevant segments with scores.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset to search
+      zh_Hans: 要搜索的数据集ID
+      pt_BR: O ID do dataset para pesquisar
+      ja_JP: 検索するデータセットのID
+    llm_description: The unique identifier (ID) of the dataset to search. Use list_datasets to get available dataset IDs.
+    form: llm
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Search Query
+      zh_Hans: 搜索查询
+      pt_BR: Consulta de Pesquisa
+      ja_JP: 検索クエリ
+    human_description:
+      en_US: The search query to find relevant chunks
+      zh_Hans: 查找相关分块的搜索查询
+      pt_BR: A consulta de pesquisa para encontrar chunks relevantes
+      ja_JP: 関連するチャンクを見つけるための検索クエリ
+    llm_description: The search query to find relevant chunks in the knowledge base. This can be a question, keywords, or natural language text.
+    form: llm
+  - name: search_method
+    type: select
+    required: false
+    default: keyword_search
+    label:
+      en_US: Search Method
+      zh_Hans: 搜索方法
+      pt_BR: Método de Pesquisa
+      ja_JP: 検索方法
+    human_description:
+      en_US: The method to use for searching
+      zh_Hans: 用于搜索的方法
+      pt_BR: O método a ser usado para pesquisa
+      ja_JP: 検索に使用する方法
+    llm_description: The search method to use. "keyword_search" for exact matches, "semantic_search" for meaning-based search, "full_text_search" for comprehensive text search, "hybrid_search" combines multiple methods.
+    form: llm
+    options:
+      - value: keyword_search
+        label:
+          en_US: Keyword Search
+          zh_Hans: 关键词搜索
+          pt_BR: Pesquisa por Palavra-chave
+          ja_JP: キーワード検索
+      - value: semantic_search
+        label:
+          en_US: Semantic Search
+          zh_Hans: 语义搜索
+          pt_BR: Pesquisa Semântica
+          ja_JP: セマンティック検索
+      - value: full_text_search
+        label:
+          en_US: Full Text Search
+          zh_Hans: 全文搜索
+          pt_BR: Pesquisa de Texto Completo
+          ja_JP: 全文検索
+      - value: hybrid_search
+        label:
+          en_US: Hybrid Search
+          zh_Hans: 混合搜索
+          pt_BR: Pesquisa Híbrida
+          ja_JP: ハイブリッド検索
+  - name: top_k
+    type: number
+    required: false
+    default: 5
+    label:
+      en_US: Top K Results
+      zh_Hans: 返回结果数
+      pt_BR: Top K Resultados
+      ja_JP: 上位K件の結果
+    human_description:
+      en_US: Number of results to return
+      zh_Hans: 返回的结果数量
+      pt_BR: Número de resultados a retornar
+      ja_JP: 返す結果の数
+    llm_description: The number of top matching chunks to return. Default is 5.
+    form: llm
+  - name: score_threshold_enabled
+    type: boolean
+    required: false
+    default: false
+    label:
+      en_US: Enable Score Threshold
+      zh_Hans: 启用分数阈值
+      pt_BR: Habilitar Limiar de Pontuação
+      ja_JP: スコア閾値を有効化
+    human_description:
+      en_US: Whether to filter results by score threshold
+      zh_Hans: 是否按分数阈值过滤结果
+      pt_BR: Se deve filtrar resultados por limiar de pontuação
+      ja_JP: スコア閾値で結果をフィルタリングするかどうか
+    llm_description: Set to true to filter results below a certain score threshold.
+    form: llm
+  - name: score_threshold
+    type: number
+    required: false
+    label:
+      en_US: Score Threshold
+      zh_Hans: 分数阈值
+      pt_BR: Limiar de Pontuação
+      ja_JP: スコア閾値
+    human_description:
+      en_US: Minimum score threshold for results (0-1)
+      zh_Hans: 结果的最小分数阈值（0-1）
+      pt_BR: Limiar mínimo de pontuação para resultados (0-1)
+      ja_JP: 結果の最小スコア閾値（0-1）
+    llm_description: The minimum score threshold for results. Only used if score_threshold_enabled is true. Value should be between 0 and 1.
+    form: llm
+extra:
+  python:
+    source: tools/retrieve_chunks.py

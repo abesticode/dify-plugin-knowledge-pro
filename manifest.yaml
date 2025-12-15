@@ -1,0 +1,41 @@
+version: 0.0.1
+type: plugin
+author: abesticode
+name: knowledge_pro
+label:
+  en_US: Knowledge Pro
+  ja_JP: Knowledge Pro
+  zh_Hans: Knowledge Pro
+  pt_BR: Knowledge Pro
+description:
+  en_US: A comprehensive AI Agent tool for managing Dify Knowledge Bases (Datasets). Enables advanced operations including creating, updating, and deleting Datasets and Documents, managing content chunks, retrieving knowledge, and applying granular metadata filtering via the Dify API.
+  ja_JP: Difyナレッジベース（データセット）を管理するための包括的なAIエージェントツール。データセットとドキュメントの作成、更新、削除、コンテンツチャンクの管理、ナレッジ検索、Dify API経由のメタデータフィルタリングなど高度な操作を可能にします。
+  zh_Hans: 一个用于管理Dify知识库（数据集）的综合AI代理工具。支持通过Dify API进行高级操作，包括创建、更新和删除数据集及文档，管理内容分块，检索知识，以及应用细粒度的元数据过滤。
+  pt_BR: Uma ferramenta abrangente de Agente AI para gerenciar Bases de Conhecimento Dify (Datasets). Permite operações avançadas incluindo criação, atualização e exclusão de Datasets e Documentos, gerenciamento de chunks de conteúdo, recuperação de conhecimento e aplicação de filtragem granular de metadados via API Dify.
+icon: icon.svg
+icon_dark: icon-dark.svg
+tags:
+  - productivity
+  - utilities
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    storage:
+      enabled: true
+      size: 1048576
+plugins:
+  tools:
+    - provider/knowledge_pro.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2025-12-14T16:24:24.876969+00:00
+privacy: PRIVACY.md

@@ -1,0 +1,216 @@
+identity:
+  name: create_document_by_text
+  author: abesticode
+  label:
+    en_US: Create/Update Document
+    zh_Hans: 创建/更新文档
+    pt_BR: Criar/Atualizar Documento
+    ja_JP: ドキュメント作成/更新
+description:
+  human:
+    en_US: Create a new document or update existing document by name in a Dify knowledge base
+    zh_Hans: 在Dify知识库中创建新文档或按名称更新现有文档
+    pt_BR: Criar um novo documento ou atualizar documento existente por nome em uma base de conhecimento Dify
+    ja_JP: Difyナレッジベースで新しいドキュメントを作成するか、名前で既存のドキュメントを更新します
+  llm: Creates a new document or updates an existing document (if a document with the same name exists) in a Dify knowledge base. Supports advanced options like chunk method, document language, custom process rules, and metadata assignment.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: Which dataset you want to add to
+      zh_Hans: 你想要添加到哪个数据集
+      pt_BR: Qual dataset você deseja adicionar
+      ja_JP: 追加先のデータセット
+    llm_description: The unique identifier (ID) of the dataset where the document will be created or updated. Use list_datasets to get available dataset IDs.
+    form: llm
+  - name: name
+    type: string
+    required: true
+    label:
+      en_US: Document Name
+      zh_Hans: 文档名称
+      pt_BR: Nome do Documento
+      ja_JP: ドキュメント名
+    human_description:
+      en_US: The name of the document. If a document with this name exists, it will be updated.
+      zh_Hans: 文档的名称。如果存在同名文档，将会更新它。
+      pt_BR: O nome do documento. Se um documento com este nome existir, ele será atualizado.
+      ja_JP: ドキュメントの名称。同名のドキュメントが存在する場合は更新されます。
+    llm_description: The name of the document. If a document with this exact name already exists in the dataset, it will be updated instead of creating a new one.
+    form: llm
+  - name: text
+    type: string
+    required: true
+    label:
+      en_US: Content
+      zh_Hans: 内容
+      pt_BR: Conteúdo
+      ja_JP: コンテンツ
+    human_description:
+      en_US: The content you want to add to knowledge base
+      zh_Hans: 你想要添加到知识库的内容
+      pt_BR: O conteúdo que você deseja adicionar à base de conhecimento
+      ja_JP: ナレッジベースへ追加したいコンテンツ
+    llm_description: The text content to be added to the document. This content will be processed and indexed for retrieval.
+    form: llm
+  - name: indexing_technique
+    type: select
+    required: true
+    default: high_quality
+    label:
+      en_US: Index Method
+      zh_Hans: 索引方式
+      pt_BR: Método de Indexação
+      ja_JP: インデックス方式
+    human_description:
+      en_US: The indexing technique you want to use
+      zh_Hans: 你想要使用的索引方式
+      pt_BR: A técnica de indexação que você deseja usar
+      ja_JP: 使用したいインデックス方式
+    options:
+      - value: high_quality
+        label:
+          en_US: High Quality
+          zh_Hans: 高质量
+          pt_BR: Alta Qualidade
+          ja_JP: 高品質
+      - value: economy
+        label:
+          en_US: Economy
+          zh_Hans: 经济
+          pt_BR: Economia
+          ja_JP: エコノミー
+    form: form
+  - name: doc_form
+    type: select
+    required: true
+    label:
+      en_US: Chunk Method
+      zh_Hans: 分段方式
+      pt_BR: Método de Chunk
+      ja_JP: チャンク方式
+    human_description:
+      en_US: The chunk settings for document segmentation
+      zh_Hans: 分段方式设置
+      pt_BR: Configurações de chunk para segmentação de documentos
+      ja_JP: ドキュメント分割のチャンク設定
+    options:
+      - value: text_model
+        label:
+          en_US: General
+          zh_Hans: 通用
+          pt_BR: Geral
+          ja_JP: 一般
+      - value: hierarchical_model
+        label:
+          en_US: Parent-child
+          zh_Hans: 父子分段
+          pt_BR: Pai-filho
+          ja_JP: 親子分割
+      - value: qa_model
+        label:
+          en_US: Q&A
+          zh_Hans: Q&A分段
+          pt_BR: Q&A
+          ja_JP: Q&A分割
+    form: form
+  - name: doc_language
+    type: select
+    required: false
+    label:
+      en_US: Document Language
+      zh_Hans: 文档语言
+      pt_BR: Idioma do Documento
+      ja_JP: ドキュメントの言語
+    human_description:
+      en_US: Document language, only for Q&A Chunk Method
+      zh_Hans: 文档语言，仅适用于 Q&A 分段方式
+      pt_BR: Idioma do documento, apenas para Método de Chunk Q&A
+      ja_JP: ドキュメントの言語、Q&Aチャンク方式でのみ利用
+    options:
+      - value: English
+        label:
+          en_US: English
+          zh_Hans: 英语
+          pt_BR: Inglês
+          ja_JP: 英語
+      - value: Chinese
+        label:
+          en_US: Chinese
+          zh_Hans: 中文
+          pt_BR: Chinês
+          ja_JP: 中国語
+      - value: Japanese
+        label:
+          en_US: Japanese
+          zh_Hans: 日语
+          pt_BR: Japonês
+          ja_JP: 日本語
+      - value: Korean
+        label:
+          en_US: Korean
+          zh_Hans: 韩语
+          pt_BR: Coreano
+          ja_JP: 韓国語
+      - value: Indonesian
+        label:
+          en_US: Indonesian
+          zh_Hans: 印尼语
+          pt_BR: Indonésio
+          ja_JP: インドネシア語
+    form: form
+  - name: process_rule
+    type: string
+    required: true
+    default: '{"mode": "automatic"}'
+    label:
+      en_US: Process Rule
+      zh_Hans: 处理规则
+      pt_BR: Regra de Processamento
+      ja_JP: 処理ルール
+    human_description:
+      en_US: |
+        Must be a valid JSON string. Examples:
+        Automatic: {"mode": "automatic"}
+        Custom: {"mode": "custom", "rules": {"pre_processing_rules": [{"id": "remove_extra_spaces", "enabled": true}, {"id": "remove_urls_emails", "enabled": false}], "segmentation": {"separator": "###", "max_tokens": 1000, "chunk_overlap": 50}}}
+      zh_Hans: |
+        必须是一个有效的 JSON 字符串。示例：
+        自动: {"mode": "automatic"}
+        自定义: {"mode": "custom", "rules": {"pre_processing_rules": [{"id": "remove_extra_spaces", "enabled": true}, {"id": "remove_urls_emails", "enabled": false}], "segmentation": {"separator": "###", "max_tokens": 1000, "chunk_overlap": 50}}}
+      pt_BR: |
+        Deve ser uma string JSON válida. Exemplos:
+        Automático: {"mode": "automatic"}
+        Personalizado: {"mode": "custom", "rules": {...}}
+      ja_JP: |
+        有効なJSON文字列を指定してください。例：
+        自動: {"mode": "automatic"}
+        カスタム: {"mode": "custom", "rules": {...}}
+    form: form
+  - name: metadata_json
+    type: string
+    required: false
+    label:
+      en_US: Metadata (JSON)
+      zh_Hans: 元数据 (JSON)
+      pt_BR: Metadados (JSON)
+      ja_JP: メタデータ (JSON)
+    human_description:
+      en_US: |
+        Optional metadata to assign to the document as JSON. Format: [{"id": "metadata_field_id", "name": "field_name", "value": "field_value"}]
+      zh_Hans: |
+        可选的文档元数据，JSON格式。格式: [{"id": "metadata_field_id", "name": "field_name", "value": "field_value"}]
+      pt_BR: |
+        Metadados opcionais para atribuir ao documento como JSON. Formato: [{"id": "...", "name": "...", "value": "..."}]
+      ja_JP: |
+        ドキュメントに割り当てるオプションのメタデータ（JSON形式）。形式: [{"id": "...", "name": "...", "value": "..."}]
+    llm_description: Optional metadata to assign to the document. Provide as JSON array of objects with id, name, and value fields.
+    form: form
+extra:
+  python:
+    source: tools/create_document_by_text.py

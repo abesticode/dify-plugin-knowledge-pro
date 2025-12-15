@@ -1,0 +1,64 @@
+identity:
+  name: delete_chunk
+  author: abesticode
+  label:
+    en_US: Delete Chunk
+    zh_Hans: 删除分块
+    pt_BR: Excluir Chunk
+    ja_JP: チャンク削除
+description:
+  human:
+    en_US: Delete a chunk (segment) from a document in a Dify knowledge base
+    zh_Hans: 从Dify知识库中的文档删除分块（段落）
+    pt_BR: Excluir um chunk (segmento) de um documento em uma base de conhecimento Dify
+    ja_JP: Difyナレッジベース内のドキュメントからチャンク（セグメント）を削除します
+  llm: Permanently deletes a chunk (segment) from a document. WARNING - This action is irreversible. Use list_chunks to get the segment_id.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset containing the document
+      zh_Hans: 包含文档的数据集ID
+      pt_BR: O ID do dataset contendo o documento
+      ja_JP: ドキュメントを含むデータセットのID
+    llm_description: The unique identifier (ID) of the dataset containing the document.
+    form: llm
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+      zh_Hans: 文档ID
+      pt_BR: ID do Documento
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: The ID of the document containing the chunk
+      zh_Hans: 包含分块的文档ID
+      pt_BR: O ID do documento contendo o chunk
+      ja_JP: チャンクを含むドキュメントのID
+    llm_description: The unique identifier (ID) of the document containing the chunk.
+    form: llm
+  - name: segment_id
+    type: string
+    required: true
+    label:
+      en_US: Segment ID
+      zh_Hans: 段落ID
+      pt_BR: ID do Segmento
+      ja_JP: セグメントID
+    human_description:
+      en_US: The ID of the chunk/segment to delete
+      zh_Hans: 要删除的分块/段落ID
+      pt_BR: O ID do chunk/segmento a ser excluído
+      ja_JP: 削除するチャンク/セグメントのID
+    llm_description: The unique identifier (ID) of the chunk/segment to delete. Use list_chunks to get available segment IDs. WARNING - This action permanently deletes the chunk.
+    form: llm
+extra:
+  python:
+    source: tools/delete_chunk.py

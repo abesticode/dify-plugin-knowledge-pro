@@ -1,0 +1,66 @@
+identity:
+  name: list_documents
+  author: abesticode
+  label:
+    en_US: List Documents
+    zh_Hans: 列出文档
+    pt_BR: Listar Documentos
+    ja_JP: ドキュメント一覧
+description:
+  human:
+    en_US: Get the list of documents in a Dify knowledge base
+    zh_Hans: 获取Dify知识库中的文档列表
+    pt_BR: Obter a lista de documentos em uma base de conhecimento Dify
+    ja_JP: Difyナレッジベース内のドキュメントリストを取得します
+  llm: Retrieves a paginated list of all documents in a specific Dify knowledge base. Returns document information including IDs, names, word counts, and indexing status. Use this to browse documents in a dataset.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset to list documents from
+      zh_Hans: 要列出文档的数据集ID
+      pt_BR: O ID do dataset para listar documentos
+      ja_JP: ドキュメントを一覧表示するデータセットのID
+    llm_description: The unique identifier (ID) of the dataset to list documents from. Use list_datasets to get available dataset IDs.
+    form: llm
+  - name: page
+    type: number
+    required: false
+    default: 1
+    label:
+      en_US: Page Number
+      zh_Hans: 页码
+      pt_BR: Número da Página
+      ja_JP: ページ番号
+    human_description:
+      en_US: The page number for pagination
+      zh_Hans: 分页的页码
+      pt_BR: O número da página para paginação
+      ja_JP: ページネーションのページ番号
+    llm_description: The page number for pagination, starting from 1. Default is 1.
+    form: llm
+  - name: limit
+    type: number
+    required: false
+    default: 20
+    label:
+      en_US: Items Per Page
+      zh_Hans: 每页条数
+      pt_BR: Itens Por Página
+      ja_JP: ページあたりの件数
+    human_description:
+      en_US: Number of documents to return per page
+      zh_Hans: 每页返回的文档数量
+      pt_BR: Número de documentos a retornar por página
+      ja_JP: 1ページあたりに返すドキュメント数
+    llm_description: Number of documents to return per page. Default is 20.
+    form: llm
+extra:
+  python:
+    source: tools/list_documents.py

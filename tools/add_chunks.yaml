@@ -1,0 +1,94 @@
+identity:
+  name: add_chunks
+  author: abesticode
+  label:
+    en_US: Add Chunks
+    zh_Hans: 添加分块
+    pt_BR: Adicionar Chunks
+    ja_JP: チャンク追加
+description:
+  human:
+    en_US: Add chunks (segments) to a document in a Dify knowledge base
+    zh_Hans: 向Dify知识库中的文档添加分块（段落）
+    pt_BR: Adicionar chunks (segmentos) a um documento em uma base de conhecimento Dify
+    ja_JP: Difyナレッジベース内のドキュメントにチャンク（セグメント）を追加します
+  llm: Adds one or more chunks (segments) to an existing document. Each chunk can have content, an optional answer (for Q&A mode), and keywords. Use list_documents to get the document_id.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset containing the document
+      zh_Hans: 包含文档的数据集ID
+      pt_BR: O ID do dataset contendo o documento
+      ja_JP: ドキュメントを含むデータセットのID
+    llm_description: The unique identifier (ID) of the dataset containing the document.
+    form: llm
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+      zh_Hans: 文档ID
+      pt_BR: ID do Documento
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: The ID of the document to add chunks to
+      zh_Hans: 要添加分块的文档ID
+      pt_BR: O ID do documento para adicionar chunks
+      ja_JP: チャンクを追加するドキュメントのID
+    llm_description: The unique identifier (ID) of the document to add chunks to.
+    form: llm
+  - name: content
+    type: string
+    required: true
+    label:
+      en_US: Chunk Content
+      zh_Hans: 分块内容
+      pt_BR: Conteúdo do Chunk
+      ja_JP: チャンクコンテンツ
+    human_description:
+      en_US: The text content for the chunk
+      zh_Hans: 分块的文本内容
+      pt_BR: O conteúdo de texto para o chunk
+      ja_JP: チャンクのテキストコンテンツ
+    llm_description: The main text content for the chunk. This is the content that will be indexed and searchable.
+    form: llm
+  - name: answer
+    type: string
+    required: false
+    label:
+      en_US: Answer (Q&A Mode)
+      zh_Hans: 答案（问答模式）
+      pt_BR: Resposta (Modo Q&A)
+      ja_JP: 回答（Q&Aモード）
+    human_description:
+      en_US: The answer for Q&A mode (optional)
+      zh_Hans: 问答模式的答案（可选）
+      pt_BR: A resposta para o modo Q&A (opcional)
+      ja_JP: Q&Aモードの回答（オプション）
+    llm_description: Optional answer text for Q&A mode. If provided, the content is treated as a question and this as the answer.
+    form: llm
+  - name: keywords
+    type: string
+    required: false
+    label:
+      en_US: Keywords
+      zh_Hans: 关键词
+      pt_BR: Palavras-chave
+      ja_JP: キーワード
+    human_description:
+      en_US: Comma-separated keywords for the chunk (optional)
+      zh_Hans: 分块的关键词，用逗号分隔（可选）
+      pt_BR: Palavras-chave separadas por vírgula para o chunk (opcional)
+      ja_JP: チャンクのキーワード、カンマ区切り（オプション）
+    llm_description: Optional comma-separated keywords for the chunk to improve search relevance.
+    form: llm
+extra:
+  python:
+    source: tools/add_chunks.py

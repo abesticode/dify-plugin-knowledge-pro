@@ -1,0 +1,49 @@
+identity:
+  name: list_chunks
+  author: abesticode
+  label:
+    en_US: List Chunks
+    zh_Hans: 列出分块
+    pt_BR: Listar Chunks
+    ja_JP: チャンク一覧
+description:
+  human:
+    en_US: Get chunks (segments) from a document in a Dify knowledge base
+    zh_Hans: 从Dify知识库中的文档获取分块（段落）
+    pt_BR: Obter chunks (segmentos) de um documento em uma base de conhecimento Dify
+    ja_JP: Difyナレッジベース内のドキュメントからチャンク（セグメント）を取得します
+  llm: Retrieves all chunks (segments) from a specific document. Returns chunk information including IDs, content, keywords, and status. Use this to view the content structure of a document.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset containing the document
+      zh_Hans: 包含文档的数据集ID
+      pt_BR: O ID do dataset contendo o documento
+      ja_JP: ドキュメントを含むデータセットのID
+    llm_description: The unique identifier (ID) of the dataset containing the document.
+    form: llm
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+      zh_Hans: 文档ID
+      pt_BR: ID do Documento
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: The ID of the document to get chunks from
+      zh_Hans: 要获取分块的文档ID
+      pt_BR: O ID do documento para obter chunks
+      ja_JP: チャンクを取得するドキュメントのID
+    llm_description: The unique identifier (ID) of the document to get chunks from. Use list_documents to get available document IDs.
+    form: llm
+extra:
+  python:
+    source: tools/list_chunks.py

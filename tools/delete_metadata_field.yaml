@@ -1,0 +1,49 @@
+identity:
+  name: delete_metadata_field
+  author: abesticode
+  label:
+    en_US: Delete Metadata Field
+    zh_Hans: 删除元数据字段
+    pt_BR: Excluir Campo de Metadados
+    ja_JP: メタデータフィールド削除
+description:
+  human:
+    en_US: Delete a metadata field from a Dify knowledge base
+    zh_Hans: 从Dify知识库删除元数据字段
+    pt_BR: Excluir um campo de metadados de uma base de conhecimento Dify
+    ja_JP: Difyナレッジベースからメタデータフィールドを削除します
+  llm: Permanently deletes a metadata field from a knowledge base. WARNING - This action is irreversible and will remove the field from all documents. Use list_metadata to get the metadata_id.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset containing the metadata field
+      zh_Hans: 包含元数据字段的数据集ID
+      pt_BR: O ID do dataset contendo o campo de metadados
+      ja_JP: メタデータフィールドを含むデータセットのID
+    llm_description: The unique identifier (ID) of the dataset containing the metadata field.
+    form: llm
+  - name: metadata_id
+    type: string
+    required: true
+    label:
+      en_US: Metadata ID
+      zh_Hans: 元数据ID
+      pt_BR: ID do Metadados
+      ja_JP: メタデータID
+    human_description:
+      en_US: The ID of the metadata field to delete
+      zh_Hans: 要删除的元数据字段ID
+      pt_BR: O ID do campo de metadados a ser excluído
+      ja_JP: 削除するメタデータフィールドのID
+    llm_description: The unique identifier (ID) of the metadata field to delete. Use list_metadata to get available metadata IDs. WARNING - This action permanently deletes the field.
+    form: llm
+extra:
+  python:
+    source: tools/delete_metadata_field.py

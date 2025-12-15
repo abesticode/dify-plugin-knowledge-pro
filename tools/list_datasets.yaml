@@ -1,0 +1,51 @@
+identity:
+  name: list_datasets
+  author: abesticode
+  label:
+    en_US: List Datasets
+    zh_Hans: 列出数据集
+    pt_BR: Listar Datasets
+    ja_JP: データセット一覧
+description:
+  human:
+    en_US: Get the list of knowledge bases (datasets) from Dify
+    zh_Hans: 从Dify获取知识库（数据集）列表
+    pt_BR: Obter a lista de bases de conhecimento (datasets) do Dify
+    ja_JP: Difyからナレッジベース（データセット）のリストを取得します
+  llm: Retrieves a paginated list of all knowledge bases (datasets) available in Dify. Returns dataset information including IDs, names, document counts, and word counts. Use this to browse available knowledge bases.
+parameters:
+  - name: page
+    type: number
+    required: false
+    default: 1
+    label:
+      en_US: Page Number
+      zh_Hans: 页码
+      pt_BR: Número da Página
+      ja_JP: ページ番号
+    human_description:
+      en_US: The page number for pagination
+      zh_Hans: 分页的页码
+      pt_BR: O número da página para paginação
+      ja_JP: ページネーションのページ番号
+    llm_description: The page number for pagination, starting from 1. Default is 1.
+    form: llm
+  - name: limit
+    type: number
+    required: false
+    default: 20
+    label:
+      en_US: Items Per Page
+      zh_Hans: 每页条数
+      pt_BR: Itens Por Página
+      ja_JP: ページあたりの件数
+    human_description:
+      en_US: Number of datasets to return per page
+      zh_Hans: 每页返回的数据集数量
+      pt_BR: Número de datasets a retornar por página
+      ja_JP: 1ページあたりに返すデータセット数
+    llm_description: Number of datasets to return per page. Default is 20, maximum is typically 100.
+    form: llm
+extra:
+  python:
+    source: tools/list_datasets.py

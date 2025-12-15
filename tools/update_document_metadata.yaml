@@ -1,0 +1,94 @@
+identity:
+  name: update_document_metadata
+  author: abesticode
+  label:
+    en_US: Update Document Metadata
+    zh_Hans: 更新文档元数据
+    pt_BR: Atualizar Metadados do Documento
+    ja_JP: ドキュメントメタデータ更新
+description:
+  human:
+    en_US: Update metadata values for a document in a Dify knowledge base
+    zh_Hans: 更新Dify知识库中文档的元数据值
+    pt_BR: Atualizar valores de metadados para um documento em uma base de conhecimento Dify
+    ja_JP: Difyナレッジベース内のドキュメントのメタデータ値を更新します
+  llm: Assigns or updates metadata values for a specific document. Use list_metadata to get available metadata field IDs and list_documents to get the document_id.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the dataset containing the document
+      zh_Hans: 包含文档的数据集ID
+      pt_BR: O ID do dataset contendo o documento
+      ja_JP: ドキュメントを含むデータセットのID
+    llm_description: The unique identifier (ID) of the dataset containing the document.
+    form: llm
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+      zh_Hans: 文档ID
+      pt_BR: ID do Documento
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: The ID of the document to update metadata for
+      zh_Hans: 要更新元数据的文档ID
+      pt_BR: O ID do documento para atualizar metadados
+      ja_JP: メタデータを更新するドキュメントのID
+    llm_description: The unique identifier (ID) of the document to update metadata for. Use list_documents to get available document IDs.
+    form: llm
+  - name: metadata_id
+    type: string
+    required: true
+    label:
+      en_US: Metadata Field ID
+      zh_Hans: 元数据字段ID
+      pt_BR: ID do Campo de Metadados
+      ja_JP: メタデータフィールドID
+    human_description:
+      en_US: The ID of the metadata field to set
+      zh_Hans: 要设置的元数据字段ID
+      pt_BR: O ID do campo de metadados a ser definido
+      ja_JP: 設定するメタデータフィールドのID
+    llm_description: The unique identifier (ID) of the metadata field to set. Use list_metadata to get available metadata field IDs.
+    form: llm
+  - name: metadata_name
+    type: string
+    required: true
+    label:
+      en_US: Metadata Field Name
+      zh_Hans: 元数据字段名称
+      pt_BR: Nome do Campo de Metadados
+      ja_JP: メタデータフィールド名
+    human_description:
+      en_US: The name of the metadata field
+      zh_Hans: 元数据字段的名称
+      pt_BR: O nome do campo de metadados
+      ja_JP: メタデータフィールドの名前
+    llm_description: The name of the metadata field. This must match the field name defined in the dataset.
+    form: llm
+  - name: metadata_value
+    type: string
+    required: true
+    label:
+      en_US: Metadata Value
+      zh_Hans: 元数据值
+      pt_BR: Valor do Metadados
+      ja_JP: メタデータ値
+    human_description:
+      en_US: The value to set for the metadata field
+      zh_Hans: 要设置的元数据字段值
+      pt_BR: O valor a ser definido para o campo de metadados
+      ja_JP: メタデータフィールドに設定する値
+    llm_description: The value to assign to the metadata field for this document.
+    form: llm
+extra:
+  python:
+    source: tools/update_document_metadata.py

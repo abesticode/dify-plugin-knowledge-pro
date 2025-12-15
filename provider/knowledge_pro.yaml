@@ -1,0 +1,73 @@
+identity:
+  author: abesticode
+  name: knowledge_pro
+  label:
+    en_US: Knowledge Pro
+    zh_Hans: Knowledge Pro
+    pt_BR: Knowledge Pro
+    ja_JP: Knowledge Pro
+  description:
+    en_US: Comprehensive management tool for Dify Knowledge Bases (Datasets) via API
+    zh_Hans: 通过API全面管理Dify知识库（数据集）的工具
+    pt_BR: Ferramenta de gerenciamento abrangente para Bases de Conhecimento Dify via API
+    ja_JP: API経由でDifyナレッジベース（データセット）を包括的に管理するツール
+  icon: icon.svg
+credentials_for_provider:
+  api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: API Key
+      zh_Hans: API密钥
+      pt_BR: Chave da API
+      ja_JP: APIキー
+    placeholder:
+      en_US: Please input your Dify Knowledge Base API Key
+      zh_Hans: 请输入您的Dify知识库API密钥
+      pt_BR: Por favor, insira sua chave da API do Dify Knowledge Base
+      ja_JP: DifyナレッジベースAPIキーを入力してください
+    help:
+      en_US: Get your API key from Dify Knowledge Base API ACCESS page
+      zh_Hans: 从Dify知识库API访问页面获取您的API密钥
+      pt_BR: Obtenha sua chave da API na página de Acesso à API do Dify Knowledge Base
+      ja_JP: DifyナレッジベースAPIアクセスページからAPIキーを取得してください
+    url: https://docs.dify.ai/guides/knowledge-base/knowledge-and-documents-maintenance
+  base_url:
+    type: text-input
+    required: true
+    label:
+      en_US: Base URL
+      zh_Hans: 基础URL
+      pt_BR: URL Base
+      ja_JP: ベースURL
+    placeholder:
+      en_US: "https://api.dify.ai/v1"
+      zh_Hans: "https://api.dify.ai/v1"
+      pt_BR: "https://api.dify.ai/v1"
+      ja_JP: "https://api.dify.ai/v1"
+    help:
+      en_US: "The base URL of your Dify API (e.g. https://api.dify.ai/v1)"
+      zh_Hans: "您的Dify API基础URL（例如 https://api.dify.ai/v1）"
+      pt_BR: "A URL base da sua API Dify (ex. https://api.dify.ai/v1)"
+      ja_JP: "Dify APIのベースURL（例 https://api.dify.ai/v1）"
+tools:
+  - tools/create_dataset.yaml
+  - tools/list_datasets.yaml
+  - tools/delete_dataset.yaml
+  - tools/create_document_by_text.yaml
+  - tools/list_documents.yaml
+  - tools/delete_document.yaml
+  - tools/get_indexing_status.yaml
+  - tools/add_chunks.yaml
+  - tools/list_chunks.yaml
+  - tools/update_chunk.yaml
+  - tools/delete_chunk.yaml
+  - tools/retrieve_chunks.yaml
+  - tools/add_metadata_field.yaml
+  - tools/update_metadata_field.yaml
+  - tools/delete_metadata_field.yaml
+  - tools/list_metadata.yaml
+  - tools/update_document_metadata.yaml
+extra:
+  python:
+    source: provider/knowledge_pro.py
