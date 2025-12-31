@@ -1,4 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <style>
+    /* Cube floating animation */
+    .cube-layer {
+      animation: float 3s ease-in-out infinite;
+    }
+    .cube-layer-1 { animation-delay: 0s; }
+    .cube-layer-2 { animation-delay: 0.2s; }
+    .cube-layer-3 { animation-delay: 0.4s; }
+    
+    /* Magnifying glass search animation */
+    .magnifier {
+      transform-origin: 62px 42px;
+      animation: search 2.5s ease-in-out infinite;
+    }
+    
+    /* Star twinkle animation */
+    .star {
+      animation: twinkle 1.5s ease-in-out infinite;
+    }
+    
+    /* Sparkle pulse animation */
+    .sparkle {
+      animation: pulse 1.5s ease-in-out infinite;
+      animation-delay: 0.5s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
+    }
+    
+    @keyframes search {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-5deg) scale(1.02); }
+      75% { transform: rotate(5deg) scale(1.02); }
+    }
+    
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.9); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+  </style>
+  
   <defs>
     <!-- Dark background gradient -->
     <linearGradient id="bgGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -45,37 +93,44 @@
   <rect x="5" y="5" width="90" height="90" rx="18" ry="18" fill="url(#bgGradDark)"/>
   
   <!-- Bottom cube (layer 3) -->
-  <polygon points="25,70 45,80 45,72 25,62" fill="url(#cubeLeftDark)" opacity="0.9"/>
-  <polygon points="45,80 65,70 65,62 45,72" fill="url(#cubeRightDark)" opacity="0.9"/>
-  <polygon points="25,62 45,52 65,62 45,72" fill="url(#cubeTopDark)" opacity="0.8"/>
+  <g class="cube-layer cube-layer-3">
+    <polygon points="25,70 45,80 45,72 25,62" fill="url(#cubeLeftDark)" opacity="0.9"/>
+    <polygon points="45,80 65,70 65,62 45,72" fill="url(#cubeRightDark)" opacity="0.9"/>
+    <polygon points="25,62 45,52 65,62 45,72" fill="url(#cubeTopDark)" opacity="0.8"/>
+  </g>
   
   <!-- Middle cube (layer 2) -->
-  <polygon points="25,55 45,65 45,57 25,47" fill="url(#cubeLeftDark)"/>
-  <polygon points="45,65 65,55 65,47 45,57" fill="url(#cubeRightDark)"/>
-  <polygon points="25,47 45,37 65,47 45,57" fill="url(#cubeTopDark)" opacity="0.9"/>
+  <g class="cube-layer cube-layer-2">
+    <polygon points="25,55 45,65 45,57 25,47" fill="url(#cubeLeftDark)"/>
+    <polygon points="45,65 65,55 65,47 45,57" fill="url(#cubeRightDark)"/>
+    <polygon points="25,47 45,37 65,47 45,57" fill="url(#cubeTopDark)" opacity="0.9"/>
+  </g>
   
   <!-- Top cube (layer 1) -->
-  <polygon points="25,40 45,50 45,42 25,32" fill="url(#cubeLeftDark)"/>
-  <polygon points="45,50 65,40 65,32 45,42" fill="url(#cubeRightDark)"/>
-  <polygon points="25,32 45,22 65,32 45,42" fill="url(#cubeTopDark)"/>
-  
-  <!-- Highlight on cubes -->
-  <polygon points="25,32 45,22 50,25 30,35" fill="#E0E7FF" opacity="0.25"/>
+  <g class="cube-layer cube-layer-1">
+    <polygon points="25,40 45,50 45,42 25,32" fill="url(#cubeLeftDark)"/>
+    <polygon points="45,50 65,40 65,32 45,42" fill="url(#cubeRightDark)"/>
+    <polygon points="25,32 45,22 65,32 45,42" fill="url(#cubeTopDark)"/>
+    <!-- Highlight on cubes -->
+    <polygon points="25,32 45,22 50,25 30,35" fill="#E0E7FF" opacity="0.25"/>
+  </g>
   
   <!-- Magnifying glass -->
-  <!-- Glass circle -->
-  <circle cx="62" cy="42" r="16" fill="url(#lensGradDark)" stroke="url(#glassGradDark)" stroke-width="4"/>
-  <!-- Glass shine -->
-  <ellipse cx="56" cy="36" rx="5" ry="4" fill="#E0E7FF" opacity="0.4"/>
-  <!-- Handle -->
-  <line x1="73" y1="53" x2="85" y2="68" stroke="url(#glassGradDark)" stroke-width="6" stroke-linecap="round"/>
-  <line x1="74" y1="54" x2="84" y2="66" stroke="#FCD34D" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <g class="magnifier">
+    <!-- Glass circle -->
+    <circle cx="62" cy="42" r="16" fill="url(#lensGradDark)" stroke="url(#glassGradDark)" stroke-width="4"/>
+    <!-- Glass shine -->
+    <ellipse cx="56" cy="36" rx="5" ry="4" fill="#E0E7FF" opacity="0.4"/>
+    <!-- Handle -->
+    <line x1="73" y1="53" x2="85" y2="68" stroke="url(#glassGradDark)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="74" y1="54" x2="84" y2="66" stroke="#FCD34D" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  </g>
   
   <!-- Pro Star -->
-  <polygon points="22,25 24,21 26,25 30,25 27,28 28,32 24,30 20,32 21,28 18,25" fill="url(#starGradDark)"/>
+  <polygon class="star" points="22,25 24,21 26,25 30,25 27,28 28,32 24,30 20,32 21,28 18,25" fill="url(#starGradDark)"/>
   
   <!-- Small sparkle bottom right -->
-  <g transform="translate(82,82)">
+  <g class="sparkle" transform="translate(82,82)">
     <line x1="0" y1="-4" x2="0" y2="4" stroke="#E0E7FF" stroke-width="1.5" opacity="0.7"/>
     <line x1="-4" y1="0" x2="4" y2="0" stroke="#E0E7FF" stroke-width="1.5" opacity="0.7"/>
     <line x1="-2.5" y1="-2.5" x2="2.5" y2="2.5" stroke="#E0E7FF" stroke-width="1" opacity="0.4"/>

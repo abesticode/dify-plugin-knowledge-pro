@@ -4,8 +4,8 @@
   <img src="_assets/icon.svg" alt="Knowledge Pro" width="120" />
 </p>
 
-**Author:** abesticode  
-**Version:** 0.0.1  
+**Author:** [abesticode](https://github.com/abesticode)  
+**Version:** 0.0.3  
 **Type:** tool
 **Repo:** https://github.com/abesticode/dify-plugin-knowledge-pro
 
@@ -283,6 +283,14 @@ The plugin provides descriptive error messages for common issues:
 - Metadata management support
 - Multiple search methods for retrieval
 - Auto create/update document feature
+
+### v0.0.2
+- Bug fixes and improvements
+- Enhanced error handling
+
+### v0.0.3
+- Added animated SVG icon with floating cubes and search effect
+- Updated documentation
 
 ## Support
 
