@@ -1,0 +1,109 @@
+identity:
+  name: list_child_chunks
+  author: abesticode
+  label:
+    en_US: List Child Chunks
+    zh_Hans: 列出子分段
+    pt_BR: Listar Chunks Filhos
+    ja_JP: 子チャンク一覧
+description:
+  human:
+    en_US: Get child chunks from a parent segment (hierarchical structure)
+    zh_Hans: 获取父分段下的子分段列表（层级结构）
+    pt_BR: Obter chunks filhos de um segmento pai (estrutura hierárquica)
+    ja_JP: 親セグメントから子チャンクを取得（階層構造）
+  llm: Retrieves a list of child chunks from a parent segment. This is useful for documents processed with hierarchical/parent-child chunk method. Supports pagination and keyword filtering.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the knowledge base
+      zh_Hans: 知识库的ID
+      pt_BR: O ID da base de conhecimento
+      ja_JP: ナレッジベースのID
+    llm_description: The unique identifier of the dataset/knowledge base.
+    form: llm
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+      zh_Hans: 文档ID
+      pt_BR: ID do Documento
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: The ID of the document
+      zh_Hans: 文档的ID
+      pt_BR: O ID do documento
+      ja_JP: ドキュメントのID
+    llm_description: The unique identifier of the document.
+    form: llm
+  - name: segment_id
+    type: string
+    required: true
+    label:
+      en_US: Parent Segment ID
+      zh_Hans: 父分段ID
+      pt_BR: ID do Segmento Pai
+      ja_JP: 親セグメントID
+    human_description:
+      en_US: The ID of the parent segment to get child chunks from
+      zh_Hans: 要获取子分段的父分段ID
+      pt_BR: O ID do segmento pai para obter chunks filhos
+      ja_JP: 子チャンクを取得する親セグメントのID
+    llm_description: The unique identifier of the parent segment.
+    form: llm
+  - name: keyword
+    type: string
+    required: false
+    label:
+      en_US: Search Keyword
+      zh_Hans: 搜索关键词
+      pt_BR: Palavra-chave de Busca
+      ja_JP: 検索キーワード
+    human_description:
+      en_US: Optional keyword to filter child chunks by content
+      zh_Hans: 可选的关键词，用于按内容筛选子分段
+      pt_BR: Palavra-chave opcional para filtrar chunks filhos por conteúdo
+      ja_JP: コンテンツで子チャンクをフィルタリングするオプションのキーワード
+    llm_description: Optional search keyword to filter child chunks.
+    form: form
+  - name: page
+    type: number
+    required: false
+    default: 1
+    label:
+      en_US: Page
+      zh_Hans: 页码
+      pt_BR: Página
+      ja_JP: ページ
+    human_description:
+      en_US: Page number for pagination (default 1)
+      zh_Hans: 分页的页码（默认1）
+      pt_BR: Número da página para paginação (padrão 1)
+      ja_JP: ページ番号（デフォルト1）
+    form: form
+  - name: limit
+    type: number
+    required: false
+    default: 20
+    label:
+      en_US: Limit
+      zh_Hans: 每页数量
+      pt_BR: Limite
+      ja_JP: 取得件数
+    human_description:
+      en_US: Number of items per page (max 100, default 20)
+      zh_Hans: 每页的项目数量（最大100，默认20）
+      pt_BR: Número de itens por página (máx 100, padrão 20)
+      ja_JP: 1ページあたりの件数（最大100、デフォルト20）
+    form: form
+extra:
+  python:
+    source: tools/list_child_chunks.py

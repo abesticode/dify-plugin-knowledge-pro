@@ -416,6 +416,139 @@ class DifyKnowledgeAPI:
             data={"query": query, "retrieval_model": retrieval_model}
         )
 
+    def get_chunk_details(
+        self,
+        dataset_id: str,
+        document_id: str,
+        segment_id: str
+    ) -> dict[str, Any]:
+        """
+        Get details of a specific chunk/segment.
+
+        Args:
+            dataset_id: The ID of the dataset
+            document_id: The ID of the document
+            segment_id: The ID of the segment/chunk
+
+        Returns:
+            dict: Chunk details including content, status, metadata
+        """
+        return self._make_request(
+            method="GET",
+            endpoint=f"/datasets/{dataset_id}/documents/{document_id}/segments/{segment_id}"
+        )
+
+    # ==================== Child Chunk Operations ====================
+
+    def list_child_chunks(
+        self,
+        dataset_id: str,
+        document_id: str,
+        segment_id: str,
+        keyword: Optional[str] = None,
+        page: int = 1,
+        limit: int = 20
+    ) -> dict[str, Any]:
+        """
+        Get child chunks from a parent segment.
+
+        Args:
+            dataset_id: The ID of the dataset
+            document_id: The ID of the document
+            segment_id: The ID of the parent segment
+            keyword: Optional search keyword to filter child chunks
+            page: Page number for pagination
+            limit: Number of items per page (max 100)
+
+        Returns:
+            dict: List of child chunks with pagination info
+        """
+        params = {"page": page, "limit": limit}
+        if keyword:
+            params["q"] = keyword
+        
+        return self._make_request(
+            method="GET",
+            endpoint=f"/datasets/{dataset_id}/documents/{document_id}/segments/{segment_id}/child_chunks",
+            params=params
+        )
+
+    def create_child_chunk(
+        self,
+        dataset_id: str,
+        document_id: str,
+        segment_id: str,
+        content: str
+    ) -> dict[str, Any]:
+        """
+        Create a new child chunk under a parent segment.
+
+        Args:
+            dataset_id: The ID of the dataset
+            document_id: The ID of the document
+            segment_id: The ID of the parent segment
+            content: The content of the child chunk
+
+        Returns:
+            dict: Created child chunk information
+        """
+        return self._make_request(
+            method="POST",
+            endpoint=f"/datasets/{dataset_id}/documents/{document_id}/segments/{segment_id}/child_chunks",
+            data={"content": content}
+        )
+
+    def update_child_chunk(
+        self,
+        dataset_id: str,
+        document_id: str,
+        segment_id: str,
+        child_chunk_id: str,
+        content: str
+    ) -> dict[str, Any]:
+        """
+        Update a child chunk's content.
+
+        Args:
+            dataset_id: The ID of the dataset
+            document_id: The ID of the document
+            segment_id: The ID of the parent segment
+            child_chunk_id: The ID of the child chunk to update
+            content: New content for the child chunk
+
+        Returns:
+            dict: Updated child chunk information
+        """
+        return self._make_request(
+            method="PATCH",
+            endpoint=f"/datasets/{dataset_id}/documents/{document_id}/segments/{segment_id}/child_chunks/{child_chunk_id}",
+            data={"content": content}
+        )
+
+    def delete_child_chunk(
+        self,
+        dataset_id: str,
+        document_id: str,
+        segment_id: str,
+        child_chunk_id: str
+    ) -> dict[str, Any]:
+        """
+        Delete a child chunk.
+
+        Args:
+            dataset_id: The ID of the dataset
+            document_id: The ID of the document
+            segment_id: The ID of the parent segment
+            child_chunk_id: The ID of the child chunk to delete
+
+        Returns:
+            dict: Success confirmation
+        """
+        return self._make_request(
+            method="DELETE",
+            endpoint=f"/datasets/{dataset_id}/documents/{document_id}/segments/{segment_id}/child_chunks/{child_chunk_id}"
+        )
+
     # ==================== Metadata Operations ====================
 
     def add_metadata_field(

@@ -1,0 +1,64 @@
+identity:
+  name: get_chunk_details
+  author: abesticode
+  label:
+    en_US: Get Chunk Details
+    zh_Hans: 获取分段详情
+    pt_BR: Obter Detalhes do Chunk
+    ja_JP: チャンク詳細取得
+description:
+  human:
+    en_US: Get detailed information of a specific chunk/segment from a document
+    zh_Hans: 获取文档中特定分段的详细信息
+    pt_BR: Obter informações detalhadas de um chunk/segmento específico de um documento
+    ja_JP: ドキュメントの特定のチャンク/セグメントの詳細情報を取得
+  llm: Retrieves complete details of a specific chunk including content, word count, tokens, keywords, hit count, indexing status, and timestamps.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the knowledge base
+      zh_Hans: 知识库的ID
+      pt_BR: O ID da base de conhecimento
+      ja_JP: ナレッジベースのID
+    llm_description: The unique identifier of the dataset/knowledge base.
+    form: llm
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+      zh_Hans: 文档ID
+      pt_BR: ID do Documento
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: The ID of the document containing the chunk
+      zh_Hans: 包含分段的文档ID
+      pt_BR: O ID do documento contendo o chunk
+      ja_JP: チャンクを含むドキュメントのID
+    llm_description: The unique identifier of the document.
+    form: llm
+  - name: segment_id
+    type: string
+    required: true
+    label:
+      en_US: Segment ID
+      zh_Hans: 分段ID
+      pt_BR: ID do Segmento
+      ja_JP: セグメントID
+    human_description:
+      en_US: The ID of the chunk/segment to retrieve details
+      zh_Hans: 要获取详情的分段ID
+      pt_BR: O ID do chunk/segmento para obter detalhes
+      ja_JP: 詳細を取得するチャンク/セグメントのID
+    llm_description: The unique identifier of the chunk/segment.
+    form: llm
+extra:
+  python:
+    source: tools/get_chunk_details.py

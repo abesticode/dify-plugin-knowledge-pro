@@ -1,0 +1,79 @@
+identity:
+  name: delete_child_chunk
+  author: abesticode
+  label:
+    en_US: Delete Child Chunk
+    zh_Hans: 删除子分段
+    pt_BR: Excluir Chunk Filho
+    ja_JP: 子チャンク削除
+description:
+  human:
+    en_US: Delete a child chunk from a parent segment
+    zh_Hans: 从父分段中删除子分段
+    pt_BR: Excluir um chunk filho de um segmento pai
+    ja_JP: 親セグメントから子チャンクを削除
+  llm: Permanently deletes a child chunk from a parent segment. This action cannot be undone.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+      zh_Hans: 数据集ID
+      pt_BR: ID do Dataset
+      ja_JP: データセットID
+    human_description:
+      en_US: The ID of the knowledge base
+      zh_Hans: 知识库的ID
+      pt_BR: O ID da base de conhecimento
+      ja_JP: ナレッジベースのID
+    llm_description: The unique identifier of the dataset/knowledge base.
+    form: llm
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+      zh_Hans: 文档ID
+      pt_BR: ID do Documento
+      ja_JP: ドキュメントID
+    human_description:
+      en_US: The ID of the document
+      zh_Hans: 文档的ID
+      pt_BR: O ID do documento
+      ja_JP: ドキュメントのID
+    llm_description: The unique identifier of the document.
+    form: llm
+  - name: segment_id
+    type: string
+    required: true
+    label:
+      en_US: Parent Segment ID
+      zh_Hans: 父分段ID
+      pt_BR: ID do Segmento Pai
+      ja_JP: 親セグメントID
+    human_description:
+      en_US: The ID of the parent segment
+      zh_Hans: 父分段的ID
+      pt_BR: O ID do segmento pai
+      ja_JP: 親セグメントのID
+    llm_description: The unique identifier of the parent segment.
+    form: llm
+  - name: child_chunk_id
+    type: string
+    required: true
+    label:
+      en_US: Child Chunk ID
+      zh_Hans: 子分段ID
+      pt_BR: ID do Chunk Filho
+      ja_JP: 子チャンクID
+    human_description:
+      en_US: The ID of the child chunk to delete
+      zh_Hans: 要删除的子分段ID
+      pt_BR: O ID do chunk filho a ser excluído
+      ja_JP: 削除する子チャンクのID
+    llm_description: The unique identifier of the child chunk to delete.
+    form: llm
+extra:
+  python:
+    source: tools/delete_child_chunk.py

@@ -60,9 +60,14 @@ tools:
   - tools/get_indexing_status.yaml
   - tools/add_chunks.yaml
   - tools/list_chunks.yaml
+  - tools/get_chunk_details.yaml
   - tools/update_chunk.yaml
   - tools/delete_chunk.yaml
   - tools/retrieve_chunks.yaml
+  - tools/list_child_chunks.yaml
+  - tools/create_child_chunk.yaml
+  - tools/update_child_chunk.yaml
+  - tools/delete_child_chunk.yaml
   - tools/add_metadata_field.yaml
   - tools/update_metadata_field.yaml
   - tools/delete_metadata_field.yaml

@@ -5,7 +5,7 @@
 </p>
 
 **Author:** [abesticode](https://github.com/abesticode)  
-**Version:** 0.0.3  
+**Version:** 0.0.4  
 **Type:** tool
 **Repo:** https://github.com/abesticode/dify-plugin-knowledge-pro
 
@@ -36,9 +36,18 @@ Knowledge Pro is a comprehensive AI Agent tool designed for managing Dify Knowle
 |------|-------------|
 | **Add Chunks** | Add content segments to documents |
 | **List Chunks** | View all segments in a document |
+| **Get Chunk Details** | Get detailed information of a specific chunk (NEW) |
 | **Update Chunk** | Modify segment content, keywords, or status |
 | **Delete Chunk** | Remove segments permanently |
 | **Retrieve Chunks** | Search knowledge base with various methods (keyword, semantic, hybrid) |
+
+### 👶 Child Chunk Operations (Hierarchical Mode)
+| Tool | Description |
+|------|-------------|
+| **List Child Chunks** | Get child chunks from a parent segment |
+| **Create Child Chunk** | Add a new child chunk under a parent segment |
+| **Update Child Chunk** | Modify child chunk content |
+| **Delete Child Chunk** | Remove a child chunk from parent segment |
 
 ### 🏷️ Metadata Operations
 | Tool | Description |
@@ -291,6 +300,16 @@ The plugin provides descriptive error messages for common issues:
 ### v0.0.3
 - Added animated SVG icon with floating cubes and search effect
 - Updated documentation
+
+### v0.0.4
+- Added **Get Chunk Details** tool for retrieving complete chunk information
+- Added **Child Chunk Operations** for hierarchical document structures:
+  - List Child Chunks
+  - Create Child Chunk
+  - Update Child Chunk
+  - Delete Child Chunk
+- Updated API utility module with new endpoints
+- Enhanced documentation
 
 ## Support
 
