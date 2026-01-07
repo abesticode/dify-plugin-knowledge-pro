@@ -207,6 +207,7 @@ class DifyKnowledgeAPI:
     def list_documents(
         self,
         dataset_id: str,
+        keyword: Optional[str] = None,
         page: int = 1,
         limit: int = 20
     ) -> dict[str, Any]:
@@ -215,16 +216,21 @@ class DifyKnowledgeAPI:
 
         Args:
             dataset_id: The ID of the dataset
+            keyword: Optional search keyword to filter documents by name
             page: Page number
             limit: Number of items per page
 
         Returns:
             dict: List of documents with pagination info
         """
+        params = {"page": page, "limit": limit}
+        if keyword:
+            params["keyword"] = keyword
+        
         return self._make_request(
             method="GET",
             endpoint=f"/datasets/{dataset_id}/documents",
-            params={"page": page, "limit": limit}
+            params=params
         )
 
     def delete_document(self, dataset_id: str, document_id: str) -> dict[str, Any]:

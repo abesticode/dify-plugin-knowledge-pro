@@ -5,7 +5,7 @@
 </p>
 
 **Author:** [abesticode](https://github.com/abesticode)  
-**Version:** 0.0.4  
+**Version:** 0.0.5  
 **Type:** tool
 **Repo:** https://github.com/abesticode/dify-plugin-knowledge-pro
 
@@ -36,7 +36,7 @@ Knowledge Pro is a comprehensive AI Agent tool designed for managing Dify Knowle
 |------|-------------|
 | **Add Chunks** | Add content segments to documents |
 | **List Chunks** | View all segments in a document |
-| **Get Chunk Details** | Get detailed information of a specific chunk (NEW) |
+| **Get Chunk Details** | Get detailed information of a specific chunk |
 | **Update Chunk** | Modify segment content, keywords, or status |
 | **Delete Chunk** | Remove segments permanently |
 | **Retrieve Chunks** | Search knowledge base with various methods (keyword, semantic, hybrid) |
@@ -310,6 +310,11 @@ The plugin provides descriptive error messages for common issues:
   - Delete Child Chunk
 - Updated API utility module with new endpoints
 - Enhanced documentation
+
+### v0.0.5
+- Added **Keyword Search** to List Documents tool for filtering documents by name
+- Improved List Documents output with document names and IDs
+- Added `rag` tag to plugin manifest
 
 ## Support
 
