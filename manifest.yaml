@@ -1,4 +1,4 @@
-version: 0.0.4
+version: 0.0.5
 type: plugin
 author: abesticode
 name: knowledge_pro
@@ -17,6 +17,7 @@ icon_dark: icon-dark.svg
 tags:
   - productivity
   - utilities
+  - rag
 resource:
   memory: 268435456
   permission:
@@ -29,7 +30,7 @@ plugins:
   tools:
     - provider/knowledge_pro.yaml
 meta:
-  version: 0.0.4
+  version: 0.0.5
   arch:
     - amd64
     - arm64
