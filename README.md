@@ -5,7 +5,7 @@
 </p>
 
 **Author:** [abesticode](https://github.com/abesticode)  
-**Version:** 0.0.5  
+**Version:** 0.0.6  
 **Type:** tool
 **Repo:** https://github.com/abesticode/dify-plugin-knowledge-pro
 
@@ -315,6 +315,22 @@ The plugin provides descriptive error messages for common issues:
 - Added **Keyword Search** to List Documents tool for filtering documents by name
 - Improved List Documents output with document names and IDs
 - Added `rag` tag to plugin manifest
+
+### v0.0.6
+- ✨ **Embedding Cost Calculation Feature:**
+  - Added configurable **Embedding Model** selection in provider credentials
+  - Added **Custom Cost** input for custom embedding models (cost per 1M tokens)
+  - Supports preset models: OpenAI (ada-002, 3-small, 3-large), Cohere, Voyage
+  - All cost calculations now use the configured model rate
+- 📊 **JSON Response Enhancement:**
+  - Added `cost_info` object to JSON response for easy data extraction
+  - Fields include: `tokens`, `cost_usd`, `embedding_model`, `cost_per_1m_tokens_usd`
+  - No more regex needed - directly select cost values from JSON!
+- 🛠️ **Tools Updated with Cost Info:**
+  - Create/Update Document - shows estimated tokens and cost
+  - Add Chunks - shows actual/estimated tokens and cost
+  - Get Indexing Status - shows actual tokens and cost after indexing
+- 📁 New utility: `CostCalculator` for centralized cost calculations
 
 ## Support
 
