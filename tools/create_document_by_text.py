@@ -7,6 +7,8 @@ import httpx
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
+from utils.cost_calculator import CostCalculator
+
 
 DEFAULT_INDEXING_TECHNIQUE = "high_quality"
 DEFAULT_PROCESS_RULE = {"mode": "automatic"}
@@ -347,26 +349,49 @@ class CreateDocumentByTextTool(Tool):
                 )
                 result["metadata_assignment"] = metadata_result
 
-            # Create response messages
+            # Create response messages with token estimation
             doc_info = result.get("document", {}) if isinstance(result, dict) else {}
             doc_id_display = doc_info.get("id", final_document_id or "N/A")
             batch = result.get("batch", "") if isinstance(result, dict) else ""
+            
+            # Create cost calculator from credentials
+            cost_calc = CostCalculator.from_credentials(self.runtime.credentials)
+            
+            # Estimate tokens from text length
+            # Approximate: 1 token ≈ 4 characters for English, 1-2 chars for CJK
+            text_length = len(text)
+            word_count = len(text.split())
+            estimated_tokens = int(text_length / 4)  # Conservative estimate
+
+            # Add cost info to result for easy JSON extraction
+            result["cost_info"] = cost_calc.get_cost_info(estimated_tokens, is_estimated=True)
+            result["cost_info"]["word_count"] = word_count
+            result["cost_info"]["character_count"] = text_length
 
             summary_parts = [
-                f"Document '{document_name}' {operation}d successfully.",
-                f"ID: {doc_id_display}",
+                f"✅ Document '{document_name}' {operation}d successfully!\n",
+                f"\n📊 **Document Information:**",
+                f"\n- Document ID: `{doc_id_display}`",
+                f"\n- Word Count: {word_count}",
+                f"\n- Character Count: {text_length}",
+                f"\n- Estimated Tokens: ~{estimated_tokens}",
             ]
+            
+            # Add cost estimation using configured model
+            if estimated_tokens > 0:
+                summary_parts.append("\n" + cost_calc.format_estimated_cost_message(estimated_tokens))
+            
             if batch:
-                summary_parts.append(f"Batch: {batch}")
+                summary_parts.append(f"\n📋 Batch: {batch}")
             if metadata_result:
                 if metadata_result.get("success"):
-                    summary_parts.append("Metadata assigned successfully.")
+                    summary_parts.append("\n\n🏷️ Metadata assigned successfully.")
                 else:
-                    summary_parts.append(f"Metadata warning: {metadata_result.get('message')}")
+                    summary_parts.append(f"\n\n⚠️ Metadata warning: {metadata_result.get('message')}")
             elif metadata_list:
-                summary_parts.append("Warning: Metadata was provided but could not be assigned (no document ID).")
+                summary_parts.append("\n\n⚠️ Warning: Metadata was provided but could not be assigned (no document ID).")
 
-            yield self.create_text_message(" ".join(summary_parts))
+            yield self.create_text_message("".join(summary_parts))
             yield self.create_json_message(result)
 
         except httpx.TimeoutException:

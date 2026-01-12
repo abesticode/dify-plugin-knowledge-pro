@@ -50,6 +50,68 @@ credentials_for_provider:
       zh_Hans: "您的Dify API基础URL（例如 https://api.dify.ai/v1）"
       pt_BR: "A URL base da sua API Dify (ex. https://api.dify.ai/v1)"
       ja_JP: "Dify APIのベースURL（例 https://api.dify.ai/v1）"
+  embedding_model:
+    type: select
+    required: false
+    label:
+      en_US: Embedding Model
+      zh_Hans: 嵌入模型
+      pt_BR: Modelo de Embedding
+      ja_JP: 埋め込みモデル
+    placeholder:
+      en_US: Select your embedding model for cost calculation
+      zh_Hans: 选择用于成本计算的嵌入模型
+      pt_BR: Selecione seu modelo de embedding para cálculo de custo
+      ja_JP: コスト計算用の埋め込みモデルを選択
+    help:
+      en_US: "Select the embedding model you use. If 'Custom', set the cost below."
+      zh_Hans: "选择您使用的嵌入模型。如果选择'自定义'，请在下方设置成本。"
+      pt_BR: "Selecione o modelo de embedding que você usa. Se 'Custom', defina o custo abaixo."
+      ja_JP: "使用している埋め込みモデルを選択。'Custom'の場合は下のコストを設定。"
+    options:
+      - value: text-embedding-ada-002
+        label:
+          en_US: OpenAI text-embedding-ada-002 ($0.10/1M)
+      - value: text-embedding-3-small
+        label:
+          en_US: OpenAI text-embedding-3-small ($0.02/1M)
+      - value: text-embedding-3-large
+        label:
+          en_US: OpenAI text-embedding-3-large ($0.13/1M)
+      - value: cohere-embed-english-v3.0
+        label:
+          en_US: Cohere embed-english-v3.0 ($0.10/1M)
+      - value: cohere-embed-multilingual-v3.0
+        label:
+          en_US: Cohere embed-multilingual-v3.0 ($0.10/1M)
+      - value: voyage-large-2
+        label:
+          en_US: Voyage voyage-large-2 ($0.12/1M)
+      - value: voyage-code-2
+        label:
+          en_US: Voyage voyage-code-2 ($0.12/1M)
+      - value: custom
+        label:
+          en_US: Custom (set cost below)
+    default: text-embedding-ada-002
+  embedding_cost_per_1m:
+    type: text-input
+    required: false
+    label:
+      en_US: Custom Embedding Cost ($/1M tokens)
+      zh_Hans: 自定义嵌入成本 ($/1M tokens)
+      pt_BR: Custo de Embedding Personalizado ($/1M tokens)
+      ja_JP: カスタム埋め込みコスト ($/1M tokens)
+    placeholder:
+      en_US: "0.10"
+      zh_Hans: "0.10"
+      pt_BR: "0.10"
+      ja_JP: "0.10"
+    help:
+      en_US: "Cost per 1 million tokens in USD. Only used when 'Custom' is selected above."
+      zh_Hans: "每100万token的成本（美元）。仅在上方选择'自定义'时使用。"
+      pt_BR: "Custo por 1 milhão de tokens em USD. Usado apenas quando 'Custom' é selecionado acima."
+      ja_JP: "100万トークンあたりのコスト（USD）。上で'Custom'を選択した場合のみ使用。"
 tools:
   - tools/create_dataset.yaml
   - tools/list_datasets.yaml
