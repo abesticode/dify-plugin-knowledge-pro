@@ -4,6 +4,7 @@ from typing import Any
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from utils.dify_knowledge_api import DifyKnowledgeAPI
+from utils.credential_resolver import resolve_credentials
 
 
 class UpdateChildChunkTool(Tool):
@@ -17,12 +18,11 @@ class UpdateChildChunkTool(Tool):
         """
         Update a child chunk's content.
         """
-        # Get credentials
-        api_key = self.runtime.credentials.get("api_key")
-        base_url = self.runtime.credentials.get("base_url")
+        # Resolve credentials (parameter override > provider credentials)
+        api_key, base_url = resolve_credentials(tool_parameters, self.runtime.credentials)
 
         if not api_key or not base_url:
-            yield self.create_text_message("API key and base URL are required.")
+            yield self.create_text_message("API key and base URL are required. Provide them as tool parameters or set up default credentials in the plugin.")
             return
 
         # Get parameters

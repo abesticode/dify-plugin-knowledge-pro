@@ -89,6 +89,36 @@ parameters:
       ja_JP: メタデータフィールドに設定する値
     llm_description: The value to assign to the metadata field for this document.
     form: llm
+  - name: api_key
+    type: secret-input
+    required: true
+    label:
+      en_US: API Key
+      zh_Hans: API密钥
+      pt_BR: Chave da API
+      ja_JP: APIキー
+    human_description:
+      en_US: Optional. Override the default API key configured in Authorization settings. Leave empty to use the default.
+      zh_Hans: 可选。覆盖授权设置中配置的默认API密钥。留空则使用默认值。
+      pt_BR: Opcional. Substituir a chave da API padrão configurada nas configurações de Autorização. Deixe vazio para usar o padrão.
+      ja_JP: オプション。認証設定のデフォルトAPIキーを上書きします。空の場合デフォルトを使用。
+    llm_description: Optional API key to override the default from Authorization settings. Leave empty to use the default.
+    form: form
+  - name: base_url
+    type: string
+    required: true
+    label:
+      en_US: Base URL
+      zh_Hans: 基础URL
+      pt_BR: URL Base
+      ja_JP: ベースURL
+    human_description:
+      en_US: 'The base URL of your Dify API (e.g. https://api.dify.ai/v1).'
+      zh_Hans: 'Dify API的基础URL（例如 https://api.dify.ai/v1）。'
+      pt_BR: 'A URL base da sua API Dify (ex. https://api.dify.ai/v1).'
+      ja_JP: 'Dify APIのベースURL（例 https://api.dify.ai/v1）。'
+    llm_description: Optional base URL to override the default from Authorization settings. Leave empty to use the default.
+    form: form
 extra:
   python:
     source: tools/update_document_metadata.py

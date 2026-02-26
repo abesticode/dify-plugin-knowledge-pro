@@ -8,6 +8,7 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from utils.cost_calculator import CostCalculator
+from utils.credential_resolver import resolve_credentials
 
 
 DEFAULT_INDEXING_TECHNIQUE = "high_quality"
@@ -224,15 +225,14 @@ class CreateDocumentByTextTool(Tool):
         """
         Create a new document or update an existing document by name.
         """
-        # Get credentials
-        api_secret = self.runtime.credentials.get("api_key")
-        base_url_credential = self.runtime.credentials.get("base_url")
+        # Resolve credentials (parameter override > provider credentials)
+        api_key, base_url_resolved = resolve_credentials(tool_parameters, self.runtime.credentials)
 
-        if not api_secret:
-            yield self.create_text_message("API key is required.")
+        if not api_key:
+            yield self.create_text_message("API key is required. Provide it as a tool parameter or set up default credentials in the plugin.")
             return
-        if not base_url_credential:
-            yield self.create_text_message("Base URL is required.")
+        if not base_url_resolved:
+            yield self.create_text_message("Base URL is required. Provide it as a tool parameter or set up default credentials in the plugin.")
             return
 
         # Get parameters
@@ -252,10 +252,10 @@ class CreateDocumentByTextTool(Tool):
             return
 
         try:
-            base_url = base_url_credential.rstrip("/")
+            base_url = base_url_resolved.rstrip("/")
             dataset_base_url = f"{base_url}/datasets/{dataset_id}"
             headers = {
-                "Authorization": f"Bearer {api_secret}",
+                "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json",
             }
 
