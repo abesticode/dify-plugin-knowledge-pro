@@ -428,7 +428,6 @@ class DifyKnowledgeAPI:
         keyword: Optional[str] = None,
         page: int = 1,
         limit: int = 20,
-        keyword: Optional[str] = None,
         status: Optional[str] = None
     ) -> dict[str, Any]:
         """
