@@ -70,7 +70,7 @@ parameters:
       en_US: Datasource Info List (JSON)
     human_description:
       en_US: JSON array of datasource objects to process
-    llm_description: JSON string array of datasource objects to process. Structure depends on datasource_type. Example: [{"reference":"file_id","name":"doc"}] for local_file.
+    llm_description: "JSON string array of datasource objects to process. Structure depends on datasource_type. Example: [{\"reference\":\"file_id\",\"name\":\"doc\"}] for local_file."
     form: llm
   - name: is_published
     type: select

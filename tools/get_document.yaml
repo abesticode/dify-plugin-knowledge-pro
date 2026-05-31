@@ -4,11 +4,11 @@ identity:
   label:
     en_US: Get Document
     zh_Hans: 获取文档详情
-  description:
-    human:
-      en_US: Get detailed information about a specific document in a knowledge base
-      zh_Hans: 获取知识库中特定文档的详细信息
-    llm: Retrieves detailed information about a specific document in a knowledge base by its ID. Includes indexing status, metadata, and processing statistics.
+description:
+  human:
+    en_US: Get detailed information about a specific document in a knowledge base
+    zh_Hans: 获取知识库中特定文档的详细信息
+  llm: Retrieves detailed information about a specific document in a knowledge base by its ID. Includes indexing status, metadata, and processing statistics.
 parameters:
   - name: dataset_id
     type: string
@@ -42,7 +42,7 @@ parameters:
     human_description:
       en_US: Filter how metadata is returned
       zh_Hans: 过滤返回的元数据内容
-    llm_description: 'all' returns all fields including metadata. 'only' returns only id, doc_type, and doc_metadata. 'without' returns all fields except doc_metadata.
+    llm_description: "all returns all fields including metadata. only returns only id, doc_type, and doc_metadata. without returns all fields except doc_metadata."
     form: llm
     options:
       - value: all
