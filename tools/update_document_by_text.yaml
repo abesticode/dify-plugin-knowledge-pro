@@ -4,11 +4,11 @@ identity:
   label:
     en_US: Update Document by Text
     zh_Hans: 通过文本更新文档
-  description:
-    human:
-      en_US: Update an existing document's text content, name, or processing configuration.
-      zh_Hans: 更新现有文档的文本内容、名称或处理配置。
-    llm: Update an existing document's text content, name, or processing configuration by its document ID. Re-triggers indexing if content changes.
+description:
+  human:
+    en_US: Update an existing document's text content, name, or processing configuration.
+    zh_Hans: 更新现有文档的文本内容、名称或处理配置。
+  llm: Update an existing document's text content, name, or processing configuration by its document ID. Re-triggers indexing if content changes.
 parameters:
   - name: dataset_id
     type: string

@@ -4,11 +4,11 @@ identity:
   label:
     en_US: Update Document Status
     zh_Hans: 更新文档状态
-  description:
-    human:
-      en_US: Enable, disable, archive, or unarchive multiple documents
-      zh_Hans: 批量启用、禁用、归档或取消归档文档
-    llm: Enable, disable, archive, or unarchive multiple documents at once in a knowledge base by providing a list of document IDs and the desired action.
+description:
+  human:
+    en_US: Enable, disable, archive, or unarchive multiple documents
+    zh_Hans: 批量启用、禁用、归档或取消归档文档
+  llm: Enable, disable, archive, or unarchive multiple documents at once in a knowledge base by providing a list of document IDs and the desired action.
 parameters:
   - name: dataset_id
     type: string
