@@ -1,0 +1,144 @@
+identity:
+  name: update_dataset
+  author: abesticode
+  label:
+    en_US: Update Dataset
+    zh_Hans: 更新数据集
+    pt_BR: Atualizar Dataset
+    ja_JP: データセット更新
+description:
+  human:
+    en_US: Update settings of an existing knowledge base
+    zh_Hans: 更新现有知识库的设置
+    pt_BR: Atualizar configurações de uma base de conhecimento existente
+    ja_JP: 既存のナレッジベースの設定を更新します
+  llm: Updates the name, description, permissions, or retrieval settings of an existing knowledge base (dataset). Only the provided fields will be updated.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+    human_description:
+      en_US: The ID of the knowledge base to update
+    llm_description: The unique identifier (ID) of the dataset to update.
+    form: llm
+  - name: name
+    type: string
+    required: false
+    label:
+      en_US: Dataset Name
+    human_description:
+      en_US: New name for the knowledge base
+    llm_description: New name for the knowledge base.
+    form: llm
+  - name: description
+    type: string
+    required: false
+    label:
+      en_US: Description
+    human_description:
+      en_US: New description of the knowledge base
+    llm_description: New description of the knowledge base.
+    form: llm
+  - name: indexing_technique
+    type: select
+    required: false
+    label:
+      en_US: Indexing Technique
+    human_description:
+      en_US: high_quality (embeddings) or economy (keywords)
+    llm_description: Indexing technique to use. high_quality uses embedding models; economy uses keyword-based indexing.
+    form: llm
+    options:
+      - value: high_quality
+        label:
+          en_US: High Quality
+      - value: economy
+        label:
+          en_US: Economy
+  - name: permission
+    type: select
+    required: false
+    label:
+      en_US: Permission
+    human_description:
+      en_US: Who can access this knowledge base
+    llm_description: Permission setting for the knowledge base.
+    form: llm
+    options:
+      - value: only_me
+        label:
+          en_US: Only Me
+      - value: all_team_members
+        label:
+          en_US: All Team Members
+      - value: partial_members
+        label:
+          en_US: Partial Members
+  - name: embedding_model
+    type: string
+    required: false
+    label:
+      en_US: Embedding Model
+    human_description:
+      en_US: Embedding model name
+    llm_description: Embedding model name.
+    form: llm
+  - name: embedding_model_provider
+    type: string
+    required: false
+    label:
+      en_US: Embedding Model Provider
+    human_description:
+      en_US: Embedding model provider name
+    llm_description: Embedding model provider name.
+    form: llm
+  - name: retrieval_model
+    type: string
+    required: false
+    label:
+      en_US: Retrieval Model Config
+    human_description:
+      en_US: JSON string for retrieval model configuration
+    llm_description: JSON string for retrieval model configuration (search_method, top_k, reranking_enable, etc).
+    form: llm
+  - name: partial_member_list
+    type: string
+    required: false
+    label:
+      en_US: Partial Member List
+    human_description:
+      en_US: JSON string of users for partial_members permission
+    llm_description: JSON array of user objects. Used only when permission is partial_members.
+    form: llm
+  - name: external_retrieval_model
+    type: string
+    required: false
+    label:
+      en_US: External Retrieval Model
+    human_description:
+      en_US: JSON string for external retrieval model configuration
+    llm_description: JSON string for external retrieval model configuration (only for external knowledge bases).
+    form: llm
+  - name: external_knowledge_api_id
+    type: string
+    required: false
+    label:
+      en_US: External Knowledge API ID
+    human_description:
+      en_US: ID of the external knowledge API connection
+    llm_description: ID of the external knowledge API connection (if provider is external).
+    form: llm
+  - name: external_knowledge_id
+    type: string
+    required: false
+    label:
+      en_US: External Knowledge ID
+    human_description:
+      en_US: ID of the external knowledge base
+    llm_description: ID of the external knowledge base (if provider is external).
+    form: llm
+extra:
+  python:
+    source: tools/update_dataset.py

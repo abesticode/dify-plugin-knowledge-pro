@@ -1,0 +1,28 @@
+identity:
+  name: list_dataset_tags
+  author: abesticode
+  label:
+    en_US: List Dataset Tags
+    zh_Hans: 列出知识库所属标签
+    pt_BR: Listar Tags do Dataset
+    ja_JP: データセットのタグ一覧
+description:
+  human:
+    en_US: Returns the list of tags bound to a specific knowledge base.
+    zh_Hans: 返回绑定到特定知识库的标签列表。
+    pt_BR: Retorna a lista de tags vinculadas a uma base de conhecimento específica.
+    ja_JP: 特定のナレッジベースにバインドされたタグのリストを返します。
+  llm: Retrieves all tags that are currently bound to a specific dataset (knowledge base).
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+    human_description:
+      en_US: The ID of the dataset/knowledge base
+    llm_description: The unique identifier of the knowledge base.
+    form: llm
+extra:
+  python:
+    source: tools/list_dataset_tags.py

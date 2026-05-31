@@ -20,6 +20,13 @@ class UpdateChunkTool(Tool):
         answer = tool_parameters.get("answer", "")
         keywords_str = tool_parameters.get("keywords", "")
         enabled = tool_parameters.get("enabled")
+        
+        regenerate_child_chunks = tool_parameters.get("regenerate_child_chunks")
+        if regenerate_child_chunks is not None and isinstance(regenerate_child_chunks, str):
+            regenerate_child_chunks = regenerate_child_chunks.lower() == "true"
+            
+        attachment_ids_str = tool_parameters.get("attachment_ids", "")
+        summary_content = tool_parameters.get("summary", "")
 
         # Validate parameters
         if not dataset_id:
@@ -33,8 +40,8 @@ class UpdateChunkTool(Tool):
             return
 
         # Check if at least one update field is provided
-        if not content and not answer and not keywords_str and enabled is None:
-            yield self.create_text_message("At least one field (content, answer, keywords, or enabled) is required to update.")
+        if not content and not answer and not keywords_str and enabled is None and regenerate_child_chunks is None and not attachment_ids_str and not summary_content:
+            yield self.create_text_message("At least one field (content, answer, keywords, enabled, regenerate_child_chunks, attachment_ids, summary) is required to update.")
             return
 
         try:
@@ -54,6 +61,17 @@ class UpdateChunkTool(Tool):
             if keywords_str:
                 keywords = [k.strip() for k in keywords_str.split(",") if k.strip()]
 
+            # Parse attachment_ids
+            attachment_ids = None
+            if attachment_ids_str:
+                import json
+                try:
+                    attachment_ids = json.loads(attachment_ids_str)
+                    if not isinstance(attachment_ids, list):
+                        attachment_ids = [str(attachment_ids)]
+                except json.JSONDecodeError:
+                    attachment_ids = [a.strip() for a in attachment_ids_str.split(",") if a.strip()]
+
             # Update chunk
             result = api.update_chunk(
                 dataset_id=dataset_id,
@@ -62,7 +80,10 @@ class UpdateChunkTool(Tool):
                 content=content if content else None,
                 answer=answer if answer else None,
                 keywords=keywords,
-                enabled=enabled
+                enabled=enabled,
+                regenerate_child_chunks=regenerate_child_chunks,
+                attachment_ids=attachment_ids,
+                summary=summary_content if summary_content else None
             )
 
             # Create response

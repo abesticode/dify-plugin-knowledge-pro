@@ -17,6 +17,8 @@ class ListDocumentsTool(Tool):
         keyword = tool_parameters.get("keyword", "").strip()
         page = int(tool_parameters.get("page", 1))
         limit = int(tool_parameters.get("limit", 20))
+        keyword = tool_parameters.get("keyword")
+        status = tool_parameters.get("status")
 
         # Validate parameters
         if not dataset_id:
@@ -38,9 +40,10 @@ class ListDocumentsTool(Tool):
             # List documents with optional keyword filter
             result = api.list_documents(
                 dataset_id=dataset_id,
-                keyword=keyword if keyword else None,
                 page=page,
-                limit=limit
+                limit=limit,
+                keyword=keyword if keyword else None,
+                status=status
             )
 
             # Create response

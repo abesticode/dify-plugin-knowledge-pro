@@ -5,7 +5,7 @@
 </p>
 
 **Author:** [abesticode](https://github.com/abesticode)  
-**Version:** 0.0.6  
+**Version:** 1.0.0  
 **Type:** tool
 **Repo:** https://github.com/abesticode/dify-plugin-knowledge-pro
 
@@ -21,13 +21,18 @@ Knowledge Pro is a comprehensive AI Agent tool designed for managing Dify Knowle
 |------|-------------|
 | **Create Dataset** | Create new empty knowledge bases |
 | **List Datasets** | Browse available knowledge bases with pagination |
+| **Get Dataset** | Retrieve detailed information about a specific knowledge base |
+| **Update Dataset** | Modify knowledge base settings (name, description, permissions, embedding model, etc.) |
 | **Delete Dataset** | Remove knowledge bases permanently |
 
 ### 📄 Document Operations
 | Tool | Description |
 |------|-------------|
-| **Create/Update Document** | Add new documents with text content, or update existing ones by name. Supports advanced options like chunk method, process rules, and metadata assignment |
+| **Create Document by Text** | Add new documents with text content. Supports advanced options like chunk method, process rules, and metadata assignment |
 | **List Documents** | Browse documents in a knowledge base |
+| **Get Document** | Retrieve detailed information about a specific document |
+| **Update Document by Text** | Update existing document content, process rules, and settings |
+| **Update Document Status** | Enable, disable, archive, or unarchive documents in batch |
 | **Delete Document** | Remove documents permanently |
 | **Get Indexing Status** | Track document embedding progress |
 
@@ -56,7 +61,33 @@ Knowledge Pro is a comprehensive AI Agent tool designed for managing Dify Knowle
 | **Update Metadata Field** | Rename metadata fields |
 | **Delete Metadata Field** | Remove metadata fields |
 | **List Metadata** | View all defined metadata fields and their IDs |
+| **List Built-in Metadata** | View all built-in metadata fields in a knowledge base |
+| **Toggle Built-in Metadata** | Enable or disable built-in metadata fields |
 | **Update Document Metadata** | Assign metadata values to documents |
+
+### 🏷️ Knowledge Tag Operations
+| Tool | Description |
+|------|-------------|
+| **List Knowledge Tags** | View all workspace-level knowledge base tags |
+| **Create Knowledge Tag** | Create a new tag for organizing knowledge bases |
+| **Update Knowledge Tag** | Rename an existing knowledge base tag |
+| **Delete Knowledge Tag** | Permanently delete a knowledge base tag |
+| **List Dataset Tags** | View tags bound to a specific knowledge base |
+| **Bind Knowledge Tags** | Attach one or more tags to a knowledge base |
+| **Unbind Knowledge Tags** | Remove one or more tags from a knowledge base |
+
+### 🤖 Model & Datasource Operations
+| Tool | Description |
+|------|-------------|
+| **List Available Models** | Browse available embedding and reranking models |
+| **List Datasource Plugins** | View available datasource plugins for knowledge bases |
+
+### 🔄 Pipeline Operations
+| Tool | Description |
+|------|-------------|
+| **Run Pipeline** | Execute a pipeline with specified parameters |
+| **Run Datasource Node** | Run a specific datasource node within a pipeline |
+| **Upload Pipeline File** | Upload a file for use in pipeline processing |
 
 ## Installation
 
@@ -331,6 +362,46 @@ The plugin provides descriptive error messages for common issues:
   - Add Chunks - shows actual/estimated tokens and cost
   - Get Indexing Status - shows actual tokens and cost after indexing
 - 📁 New utility: `CostCalculator` for centralized cost calculations
+
+### v1.0.0
+🎉 **Major Release** — Comprehensive expansion of the Knowledge Pro plugin with 19 new tools and significant improvements.
+
+#### New Dataset Operations
+- **Get Dataset** — Retrieve detailed info about a specific knowledge base
+- **Update Dataset** — Modify knowledge base settings (name, description, permissions, embedding model, retrieval model, etc.)
+
+#### New Document Operations
+- **Get Document** — Retrieve detailed info about a specific document including metadata
+- **Update Document by Text** — Update existing document content and settings separately from create
+- **Update Document Status** — Batch enable, disable, archive, or unarchive documents
+
+#### Knowledge Tag Management (NEW category)
+- **List Knowledge Tags** — View all workspace-level tags
+- **Create Knowledge Tag** — Create new tags for organizing knowledge bases
+- **Update Knowledge Tag** — Rename existing tags
+- **Delete Knowledge Tag** — Remove tags permanently
+- **List Dataset Tags** — View tags bound to a specific knowledge base
+- **Bind Knowledge Tags** — Attach tags to a knowledge base
+- **Unbind Knowledge Tags** — Remove tags from a knowledge base
+
+#### Built-in Metadata Management (NEW category)
+- **List Built-in Metadata** — View all built-in metadata fields
+- **Toggle Built-in Metadata** — Enable or disable built-in metadata fields
+
+#### Model & Datasource Discovery (NEW category)
+- **List Available Models** — Browse available embedding and reranking models
+- **List Datasource Plugins** — View available datasource plugins
+
+#### Pipeline Operations (NEW category)
+- **Run Pipeline** — Execute a pipeline with specified parameters
+- **Run Datasource Node** — Run a specific datasource node within a pipeline
+- **Upload Pipeline File** — Upload a file for pipeline processing
+
+#### Improvements
+- Enhanced existing tools with improved parameter handling and error messages
+- Fixed `retrieve_chunks` response parsing for API compatibility
+- Updated API utility module with all new endpoints
+- Expanded provider configuration to register all 41 tools
 
 ## Support
 

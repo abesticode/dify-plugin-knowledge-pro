@@ -89,6 +89,22 @@ parameters:
       ja_JP: メタデータフィールドに設定する値
     llm_description: The value to assign to the metadata field for this document.
     form: llm
+  - name: partial_update
+    type: select
+    required: false
+    label:
+      en_US: Partial Update
+    human_description:
+      en_US: Whether to partially update metadata, keeping existing values for unspecified fields
+    llm_description: Whether to partially update metadata, keeping existing values for unspecified fields. true or false.
+    form: llm
+    options:
+      - value: true
+        label:
+          en_US: "True"
+      - value: false
+        label:
+          en_US: "False"
 extra:
   python:
     source: tools/update_document_metadata.py

@@ -1,0 +1,28 @@
+identity:
+  name: list_built_in_metadata
+  author: abesticode
+  label:
+    en_US: List Built-in Metadata
+    zh_Hans: 列出内置元数据
+    pt_BR: Listar Metadados Embutidos
+    ja_JP: 組み込みメタデータ一覧
+description:
+  human:
+    en_US: Returns the list of built-in metadata fields provided by the system.
+    zh_Hans: 返回系统提供的内置元数据字段列表。
+    pt_BR: Retorna a lista de campos de metadados embutidos fornecidos pelo sistema.
+    ja_JP: システムが提供する組み込みメタデータフィールドのリストを返します。
+  llm: Retrieves the list of built-in metadata fields for a knowledge base (e.g., document_name, uploader, upload_date).
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+    human_description:
+      en_US: The ID of the dataset/knowledge base
+    llm_description: The unique identifier of the knowledge base.
+    form: llm
+extra:
+  python:
+    source: tools/list_built_in_metadata.py

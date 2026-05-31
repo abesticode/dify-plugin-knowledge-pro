@@ -58,6 +58,102 @@ parameters:
           zh_Hans: 所有团队成员
           pt_BR: Todos os Membros da Equipe
           ja_JP: チーム全員
+  - name: description
+    type: string
+    required: false
+    label:
+      en_US: Description
+    human_description:
+      en_US: Description of the knowledge base
+    llm_description: Optional description of the knowledge base.
+    form: llm
+  - name: indexing_technique
+    type: select
+    required: false
+    label:
+      en_US: Indexing Technique
+    human_description:
+      en_US: high_quality (embeddings) or economy (keywords)
+    llm_description: Indexing technique to use. high_quality uses embedding models; economy uses keyword-based indexing.
+    form: llm
+    options:
+      - value: high_quality
+        label:
+          en_US: High Quality
+      - value: economy
+        label:
+          en_US: Economy
+  - name: provider
+    type: select
+    required: false
+    default: vendor
+    label:
+      en_US: Provider
+    human_description:
+      en_US: vendor (internal) or external
+    llm_description: Provider type. vendor for internal knowledge base, external for external connections.
+    form: llm
+    options:
+      - value: vendor
+        label:
+          en_US: Vendor
+      - value: external
+        label:
+          en_US: External
+  - name: embedding_model
+    type: string
+    required: false
+    label:
+      en_US: Embedding Model
+    human_description:
+      en_US: Embedding model name
+    llm_description: Embedding model name.
+    form: llm
+  - name: embedding_model_provider
+    type: string
+    required: false
+    label:
+      en_US: Embedding Model Provider
+    human_description:
+      en_US: Embedding model provider name
+    llm_description: Embedding model provider name.
+    form: llm
+  - name: retrieval_model
+    type: string
+    required: false
+    label:
+      en_US: Retrieval Model Config
+    human_description:
+      en_US: JSON string for retrieval model configuration
+    llm_description: JSON string for retrieval model configuration (search_method, top_k, reranking_enable, etc).
+    form: llm
+  - name: external_knowledge_api_id
+    type: string
+    required: false
+    label:
+      en_US: External Knowledge API ID
+    human_description:
+      en_US: ID of the external knowledge API connection
+    llm_description: ID of the external knowledge API connection (if provider is external).
+    form: llm
+  - name: external_knowledge_id
+    type: string
+    required: false
+    label:
+      en_US: External Knowledge ID
+    human_description:
+      en_US: ID of the external knowledge base
+    llm_description: ID of the external knowledge base (if provider is external).
+    form: llm
+  - name: summary_index_setting
+    type: string
+    required: false
+    label:
+      en_US: Summary Index Setting
+    human_description:
+      en_US: JSON string for summary index configuration
+    llm_description: JSON string for summary index configuration (enable, model_name, etc).
+    form: llm
 extra:
   python:
     source: tools/create_dataset.py

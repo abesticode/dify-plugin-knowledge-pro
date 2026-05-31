@@ -115,9 +115,14 @@ credentials_for_provider:
 tools:
   - tools/create_dataset.yaml
   - tools/list_datasets.yaml
+  - tools/get_dataset.yaml
+  - tools/update_dataset.yaml
   - tools/delete_dataset.yaml
   - tools/create_document_by_text.yaml
   - tools/list_documents.yaml
+  - tools/get_document.yaml
+  - tools/update_document_by_text.yaml
+  - tools/update_document_status.yaml
   - tools/delete_document.yaml
   - tools/get_indexing_status.yaml
   - tools/add_chunks.yaml
@@ -134,7 +139,21 @@ tools:
   - tools/update_metadata_field.yaml
   - tools/delete_metadata_field.yaml
   - tools/list_metadata.yaml
+  - tools/list_built_in_metadata.yaml
+  - tools/toggle_built_in_metadata.yaml
   - tools/update_document_metadata.yaml
+  - tools/list_knowledge_tags.yaml
+  - tools/create_knowledge_tag.yaml
+  - tools/update_knowledge_tag.yaml
+  - tools/delete_knowledge_tag.yaml
+  - tools/list_dataset_tags.yaml
+  - tools/bind_knowledge_tags.yaml
+  - tools/unbind_knowledge_tags.yaml
+  - tools/list_available_models.yaml
+  - tools/list_datasource_plugins.yaml
+  - tools/run_pipeline.yaml
+  - tools/run_datasource_node.yaml
+  - tools/upload_pipeline_file.yaml
 extra:
   python:
     source: provider/knowledge_pro.py

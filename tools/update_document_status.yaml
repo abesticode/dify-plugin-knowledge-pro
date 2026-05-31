@@ -1,0 +1,55 @@
+identity:
+  name: update_document_status
+  author: abesticode
+  label:
+    en_US: Update Document Status
+    zh_Hans: 更新文档状态
+  description:
+    human:
+      en_US: Enable, disable, archive, or unarchive multiple documents
+      zh_Hans: 批量启用、禁用、归档或取消归档文档
+    llm: Enable, disable, archive, or unarchive multiple documents at once in a knowledge base by providing a list of document IDs and the desired action.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+    human_description:
+      en_US: The ID of the knowledge base
+    llm_description: The unique identifier (ID) of the dataset.
+    form: llm
+  - name: action
+    type: select
+    required: true
+    label:
+      en_US: Action
+    human_description:
+      en_US: enable, disable, archive, or un_archive
+    llm_description: The action to apply to the documents. enable to activate, disable to deactivate, archive to archive, un_archive to restore from archive.
+    form: llm
+    options:
+      - value: enable
+        label:
+          en_US: Enable
+      - value: disable
+        label:
+          en_US: Disable
+      - value: archive
+        label:
+          en_US: Archive
+      - value: un_archive
+        label:
+          en_US: Un-Archive
+  - name: document_ids
+    type: string
+    required: true
+    label:
+      en_US: Document IDs
+    human_description:
+      en_US: Comma-separated or JSON array of document IDs
+    llm_description: List of document IDs to update. Provide a JSON array of strings or a comma-separated list of IDs.
+    form: llm
+extra:
+  python:
+    source: tools/update_document_status.py

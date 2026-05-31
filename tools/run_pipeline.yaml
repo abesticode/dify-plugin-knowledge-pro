@@ -1,0 +1,93 @@
+identity:
+  name: run_pipeline
+  author: abesticode
+  label:
+    en_US: Run Pipeline
+    zh_Hans: 运行Pipeline
+    pt_BR: Executar Pipeline
+    ja_JP: パイプライン実行
+description:
+  human:
+    en_US: Execute the full knowledge pipeline for a knowledge base.
+    zh_Hans: 为知识库执行完整的知识Pipeline。
+    pt_BR: Executar o pipeline completo de conhecimento para uma base de conhecimento.
+    ja_JP: ナレッジベースの完全なナレッジパイプラインを実行します。
+  llm: Executes the full knowledge pipeline for a dataset. Always uses 'blocking' response mode to return the final JSON result instead of raw SSE streams.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+    human_description:
+      en_US: The ID of the dataset/knowledge base
+    llm_description: The unique identifier of the knowledge base.
+    form: llm
+  - name: start_node_id
+    type: string
+    required: true
+    label:
+      en_US: Start Node ID
+    human_description:
+      en_US: ID of the node to start pipeline execution from
+    llm_description: The ID of the node to start execution from (retrieved from list_datasource_plugins).
+    form: llm
+  - name: datasource_type
+    type: select
+    required: true
+    label:
+      en_US: Datasource Type
+    human_description:
+      en_US: Type of the datasource
+    llm_description: Type of the datasource (local_file, online_document, website_crawl, online_drive).
+    form: llm
+    options:
+      - value: local_file
+        label:
+          en_US: Local File
+      - value: online_document
+        label:
+          en_US: Online Document
+      - value: website_crawl
+        label:
+          en_US: Website Crawl
+      - value: online_drive
+        label:
+          en_US: Online Drive
+  - name: inputs
+    type: string
+    required: true
+    label:
+      en_US: Inputs (JSON)
+    human_description:
+      en_US: Pipeline input variables in JSON string format
+    llm_description: A JSON string for pipeline input variables defined in the workflow. Pass "{}" if none.
+    form: llm
+  - name: datasource_info_list
+    type: string
+    required: true
+    label:
+      en_US: Datasource Info List (JSON)
+    human_description:
+      en_US: JSON array of datasource objects to process
+    llm_description: JSON string array of datasource objects to process. Structure depends on datasource_type. Example: [{"reference":"file_id","name":"doc"}] for local_file.
+    form: llm
+  - name: is_published
+    type: select
+    required: false
+    label:
+      en_US: Is Published
+    human_description:
+      en_US: Whether to run the published or draft version
+    llm_description: Whether to run the published (true) or draft (false) version of the pipeline.
+    form: llm
+    options:
+      - value: true
+        label:
+          en_US: "True"
+      - value: false
+        label:
+          en_US: "False"
+extra:
+  python:
+    source: tools/run_pipeline.py

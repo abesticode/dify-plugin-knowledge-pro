@@ -7,18 +7,15 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 from utils.dify_knowledge_api import DifyKnowledgeAPI
 
 
-class ListChunksTool(Tool):
+class GetDocumentTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         """
-        Get chunks (segments) from a document in a Dify knowledge base.
+        Get detailed information about a specific document in a Dify knowledge base.
         """
         # Get parameters
         dataset_id = tool_parameters.get("dataset_id", "")
         document_id = tool_parameters.get("document_id", "")
-        page = int(tool_parameters.get("page", 1))
-        limit = int(tool_parameters.get("limit", 20))
-        keyword = tool_parameters.get("keyword")
-        status = tool_parameters.get("status")
+        metadata_filter = tool_parameters.get("metadata_filter", "all")
 
         # Validate parameters
         if not dataset_id:
@@ -40,28 +37,22 @@ class ListChunksTool(Tool):
             # Create API client
             api = DifyKnowledgeAPI(api_key, base_url)
 
-            # List chunks
-            result = api.list_chunks(
+            # Get document details
+            result = api.get_document(
                 dataset_id=dataset_id, 
                 document_id=document_id,
-                page=page,
-                limit=limit,
-                keyword=keyword,
-                status=status
+                metadata=metadata_filter
             )
 
             # Create response
-            data = result.get("data", [])
-            doc_form = result.get("doc_form", "unknown")
-
-            if not data:
-                yield self.create_text_message(f"No chunks found in document '{document_id}'.")
-            else:
-                summary = f"Found {len(data)} chunk(s) in document. Document form: {doc_form}"
-                yield self.create_text_message(summary)
-
+            name = result.get("name", "Unknown")
+            status = result.get("display_status", result.get("indexing_status", "Unknown"))
+            tokens = result.get("tokens", 0)
+            
+            summary = f"Retrieved document '{name}' successfully. Status: {status}, Tokens: {tokens}."
+            yield self.create_text_message(summary)
             yield self.create_json_message(result)
 
         except Exception as e:
-            yield self.create_text_message(f"Error listing chunks: {str(e)}")
+            yield self.create_text_message(f"Error getting document: {str(e)}")
             return

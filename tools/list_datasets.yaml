@@ -46,6 +46,52 @@ parameters:
       ja_JP: 1ページあたりに返すデータセット数
     llm_description: Number of datasets to return per page. Default is 20, maximum is typically 100.
     form: llm
+  - name: keyword
+    type: string
+    required: false
+    label:
+      en_US: Keyword Search
+      zh_Hans: 关键词搜索
+      pt_BR: Pesquisa por Palavra-chave
+      ja_JP: キーワード検索
+    human_description:
+      en_US: Search keyword to filter datasets by name
+      zh_Hans: 按名称过滤数据集的搜索关键词
+      pt_BR: Palavra-chave de pesquisa para filtrar datasets por nome
+      ja_JP: 名前でデータセットをフィルタリングするための検索キーワード
+    llm_description: Optional keyword to search and filter knowledge bases by their name.
+    form: llm
+  - name: include_all
+    type: boolean
+    required: false
+    default: false
+    label:
+      en_US: Include All
+      zh_Hans: 包含所有
+      pt_BR: Incluir Todos
+      ja_JP: すべて含める
+    human_description:
+      en_US: Whether to include all knowledge bases regardless of permissions
+      zh_Hans: 是否包含所有知识库（无视权限）
+      pt_BR: Se deve incluir todas as bases de conhecimento, independentemente das permissões
+      ja_JP: 権限に関係なくすべてのナレッジベースを含めるかどうか
+    llm_description: Set to true to list all datasets in the workspace, false to only show ones you have access to.
+    form: llm
+  - name: tag_ids
+    type: string
+    required: false
+    label:
+      en_US: Tag IDs
+      zh_Hans: 标签IDs
+      pt_BR: IDs de Tag
+      ja_JP: タグID
+    human_description:
+      en_US: Filter by tag IDs (comma-separated or JSON array)
+      zh_Hans: 按标签ID过滤（逗号分隔或JSON数组）
+      pt_BR: Filtrar por IDs de tag (separados por vírgula ou array JSON)
+      ja_JP: タグIDでフィルタリング（カンマ区切りまたはJSON配列）
+    llm_description: Filter datasets by their tag IDs. Provide a JSON array of strings, or a comma-separated list of tag IDs.
+    form: llm
 extra:
   python:
     source: tools/list_datasets.py

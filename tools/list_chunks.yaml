@@ -44,6 +44,54 @@ parameters:
       ja_JP: チャンクを取得するドキュメントのID
     llm_description: The unique identifier (ID) of the document to get chunks from. Use list_documents to get available document IDs.
     form: llm
+  - name: page
+    type: number
+    required: false
+    default: 1
+    label:
+      en_US: Page
+    human_description:
+      en_US: Page number to retrieve
+    llm_description: Page number to retrieve. Default is 1.
+    form: llm
+  - name: limit
+    type: number
+    required: false
+    default: 20
+    label:
+      en_US: Limit
+    human_description:
+      en_US: Number of chunks to return per page
+    llm_description: Number of chunks to return per page. Default is 20, max 100.
+    form: llm
+  - name: keyword
+    type: string
+    required: false
+    label:
+      en_US: Keyword Search
+    human_description:
+      en_US: Search keyword
+    llm_description: Optional search keyword to filter chunks.
+    form: llm
+  - name: status
+    type: select
+    required: false
+    label:
+      en_US: Status Filter
+    human_description:
+      en_US: Filter chunks by indexing status
+    llm_description: Filter chunks by indexing status (completed, indexing, error).
+    form: llm
+    options:
+      - value: completed
+        label:
+          en_US: Completed
+      - value: indexing
+        label:
+          en_US: Indexing
+      - value: error
+        label:
+          en_US: Error
 extra:
   python:
     source: tools/list_chunks.py

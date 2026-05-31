@@ -76,6 +76,37 @@ parameters:
       ja_JP: 1ページあたりに返すドキュメント数（デフォルト20）
     llm_description: Number of documents to return per page. Default is 20.
     form: form
+  - name: status
+    type: select
+    required: false
+    label:
+      en_US: Status Filter
+    human_description:
+      en_US: Filter by display status
+    llm_description: Optional filter by document display status.
+    form: llm
+    options:
+      - value: queuing
+        label:
+          en_US: Queuing
+      - value: indexing
+        label:
+          en_US: Indexing
+      - value: paused
+        label:
+          en_US: Paused
+      - value: error
+        label:
+          en_US: Error
+      - value: available
+        label:
+          en_US: Available
+      - value: disabled
+        label:
+          en_US: Disabled
+      - value: archived
+        label:
+          en_US: Archived
 extra:
   python:
     source: tools/list_documents.py

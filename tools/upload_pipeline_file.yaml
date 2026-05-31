@@ -1,0 +1,37 @@
+identity:
+  name: upload_pipeline_file
+  author: abesticode
+  label:
+    en_US: Upload Pipeline File
+    zh_Hans: 上传Pipeline文件
+    pt_BR: Fazer Upload de Arquivo do Pipeline
+    ja_JP: パイプラインファイルアップロード
+description:
+  human:
+    en_US: Upload a file for use in a knowledge pipeline.
+    zh_Hans: 上传用于知识库Pipeline的文件。
+    pt_BR: Fazer upload de um arquivo para uso em um pipeline de conhecimento.
+    ja_JP: ナレッジパイプラインで使用するファイルをアップロードします。
+  llm: Uploads a local file to the Dify Knowledge Pipeline and returns its reference ID for use in pipeline execution.
+parameters:
+  - name: file_path
+    type: string
+    required: true
+    label:
+      en_US: File Path
+    human_description:
+      en_US: Absolute path to the file to upload
+    llm_description: The absolute file path of the local file to upload.
+    form: llm
+  - name: mime_type
+    type: string
+    required: false
+    label:
+      en_US: MIME Type
+    human_description:
+      en_US: MIME type of the file (e.g. application/pdf, text/plain)
+    llm_description: The MIME type of the file. Defaults to application/octet-stream.
+    form: llm
+extra:
+  python:
+    source: tools/upload_pipeline_file.py

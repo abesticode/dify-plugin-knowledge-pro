@@ -19,6 +19,7 @@ class AddChunksTool(Tool):
         content = tool_parameters.get("content", "").strip()
         answer = tool_parameters.get("answer", "").strip()
         keywords_str = tool_parameters.get("keywords", "").strip()
+        attachment_ids_str = tool_parameters.get("attachment_ids", "").strip()
 
         # Validate parameters
         if not dataset_id:
@@ -49,12 +50,25 @@ class AddChunksTool(Tool):
             if keywords_str:
                 keywords = [k.strip() for k in keywords_str.split(",") if k.strip()]
 
+            # Parse attachment_ids
+            attachment_ids = []
+            if attachment_ids_str:
+                import json
+                try:
+                    attachment_ids = json.loads(attachment_ids_str)
+                    if not isinstance(attachment_ids, list):
+                        attachment_ids = [str(attachment_ids)]
+                except json.JSONDecodeError:
+                    attachment_ids = [a.strip() for a in attachment_ids_str.split(",") if a.strip()]
+
             # Build segment object
             segment = {"content": content}
             if answer:
                 segment["answer"] = answer
             if keywords:
                 segment["keywords"] = keywords
+            if attachment_ids:
+                segment["attachment_ids"] = attachment_ids
 
             # Add chunks
             result = api.add_chunks(

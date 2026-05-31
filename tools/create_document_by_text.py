@@ -239,6 +239,23 @@ class CreateDocumentByTextTool(Tool):
         dataset_id = tool_parameters.get("dataset_id", "")
         document_name = tool_parameters.get("name", "")
         text = tool_parameters.get("text", "")
+        doc_form = tool_parameters.get("doc_form")
+        doc_language = tool_parameters.get("doc_language")
+        original_document_id = tool_parameters.get("original_document_id")
+        embedding_model = tool_parameters.get("embedding_model")
+        embedding_model_provider = tool_parameters.get("embedding_model_provider")
+
+        def parse_json_param(param_name):
+            val = tool_parameters.get(param_name)
+            if val and isinstance(val, str):
+                try:
+                    return json.loads(val)
+                except json.JSONDecodeError:
+                    pass
+            return val if isinstance(val, dict) else None
+
+        process_rule = parse_json_param("process_rule")
+        retrieval_model = parse_json_param("retrieval_model")
 
         # Validate required parameters
         if not dataset_id:
@@ -268,15 +285,22 @@ class CreateDocumentByTextTool(Tool):
                 ),
             }
 
-            # Add optional doc_form
-            doc_form = tool_parameters.get("doc_form")
+            # Add optional parameters
             if doc_form not in (None, ""):
                 data["doc_form"] = doc_form
 
             # Add optional doc_language
-            doc_language = tool_parameters.get("doc_language")
             if doc_language not in (None, ""):
                 data["doc_language"] = doc_language
+                
+            if embedding_model:
+                data["embedding_model"] = embedding_model
+            if embedding_model_provider:
+                data["embedding_model_provider"] = embedding_model_provider
+            if original_document_id:
+                data["original_document_id"] = original_document_id
+            if retrieval_model:
+                data["retrieval_model"] = retrieval_model
 
             # Load and validate process_rule
             try:

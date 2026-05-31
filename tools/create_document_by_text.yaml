@@ -211,6 +211,42 @@ parameters:
         ドキュメントに割り当てるオプションのメタデータ（JSON形式）。形式: [{"id": "...", "name": "...", "value": "..."}]
     llm_description: Optional metadata to assign to the document. Provide as JSON array of objects with id, name, and value fields.
     form: form
+  - name: retrieval_model
+    type: string
+    required: false
+    label:
+      en_US: Retrieval Model Config
+    human_description:
+      en_US: JSON string for retrieval model configuration
+    llm_description: JSON string for retrieval model configuration.
+    form: form
+  - name: embedding_model
+    type: string
+    required: false
+    label:
+      en_US: Embedding Model
+    human_description:
+      en_US: Embedding model name
+    llm_description: Embedding model name.
+    form: form
+  - name: embedding_model_provider
+    type: string
+    required: false
+    label:
+      en_US: Embedding Model Provider
+    human_description:
+      en_US: Embedding model provider name
+    llm_description: Embedding model provider name.
+    form: form
+  - name: original_document_id
+    type: string
+    required: false
+    label:
+      en_US: Original Document ID
+    human_description:
+      en_US: Original document ID for versioning
+    llm_description: Original document ID for versioning.
+    form: form
 extra:
   python:
     source: tools/create_document_by_text.py

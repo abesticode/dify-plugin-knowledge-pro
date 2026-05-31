@@ -1,0 +1,28 @@
+identity:
+  name: create_knowledge_tag
+  author: abesticode
+  label:
+    en_US: Create Knowledge Tag
+    zh_Hans: 创建知识库标签
+    pt_BR: Criar Tag de Conhecimento
+    ja_JP: ナレッジタグ作成
+description:
+  human:
+    en_US: Create a new tag for organizing knowledge bases.
+    zh_Hans: 创建一个用于组织知识库的新标签。
+    pt_BR: Cria uma nova tag para organizar bases de conhecimento.
+    ja_JP: ナレッジベースを整理するための新しいタグを作成します。
+  llm: Creates a new tag in the workspace. The tag can later be bound to multiple knowledge bases.
+parameters:
+  - name: name
+    type: string
+    required: true
+    label:
+      en_US: Tag Name
+    human_description:
+      en_US: The name of the tag (1-50 characters)
+    llm_description: The name for the new tag. Length must be 1-50 characters.
+    form: llm
+extra:
+  python:
+    source: tools/create_knowledge_tag.py

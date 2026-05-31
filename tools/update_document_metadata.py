@@ -18,6 +18,12 @@ class UpdateDocumentMetadataTool(Tool):
         metadata_id = tool_parameters.get("metadata_id", "")
         metadata_name = tool_parameters.get("metadata_name", "")
         metadata_value = tool_parameters.get("metadata_value", "")
+        
+        partial_update = tool_parameters.get("partial_update")
+        if partial_update is not None and isinstance(partial_update, str):
+            partial_update = partial_update.lower() == "true"
+        elif partial_update is None:
+            partial_update = False
 
         # Validate parameters
         if not dataset_id:
@@ -58,7 +64,8 @@ class UpdateDocumentMetadataTool(Tool):
                             "name": metadata_name,
                             "value": metadata_value
                         }
-                    ]
+                    ],
+                    "partial_update": partial_update
                 }
             ]
 

@@ -1,0 +1,93 @@
+identity:
+  name: run_datasource_node
+  author: abesticode
+  label:
+    en_US: Run Datasource Node
+    zh_Hans: 运行数据源节点
+    pt_BR: Executar Nó de Fonte de Dados
+    ja_JP: データソースノード実行
+description:
+  human:
+    en_US: Execute a single datasource node within the knowledge pipeline.
+    zh_Hans: 在知识库Pipeline中执行单个数据源节点。
+    pt_BR: Executar um único nó de fonte de dados dentro do pipeline de conhecimento.
+    ja_JP: ナレッジパイプライン内で単一のデータソースノードを実行します。
+  llm: Executes a specific datasource node in the pipeline. It handles Server-Sent Events streams natively if configured.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+    human_description:
+      en_US: The ID of the dataset/knowledge base
+    llm_description: The unique identifier of the knowledge base.
+    form: llm
+  - name: node_id
+    type: string
+    required: true
+    label:
+      en_US: Node ID
+    human_description:
+      en_US: ID of the datasource node to execute
+    llm_description: The ID of the node to execute (can be retrieved from list_datasource_plugins).
+    form: llm
+  - name: datasource_type
+    type: select
+    required: true
+    label:
+      en_US: Datasource Type
+    human_description:
+      en_US: Type of the datasource
+    llm_description: Type of the datasource (local_file, online_document, website_crawl, online_drive).
+    form: llm
+    options:
+      - value: local_file
+        label:
+          en_US: Local File
+      - value: online_document
+        label:
+          en_US: Online Document
+      - value: website_crawl
+        label:
+          en_US: Website Crawl
+      - value: online_drive
+        label:
+          en_US: Online Drive
+  - name: inputs
+    type: string
+    required: true
+    label:
+      en_US: Inputs (JSON)
+    human_description:
+      en_US: Input variables in JSON string format
+    llm_description: A JSON string representing the input variables for the datasource node. Use "{}" if empty.
+    form: llm
+  - name: credential_id
+    type: string
+    required: false
+    label:
+      en_US: Credential ID
+    human_description:
+      en_US: ID of the credential to use (optional)
+    llm_description: Optional ID of the credential to authenticate with the datasource.
+    form: llm
+  - name: is_published
+    type: select
+    required: false
+    label:
+      en_US: Is Published
+    human_description:
+      en_US: Whether to run the published or draft version
+    llm_description: Whether to run the published (true) or draft (false) version of the node.
+    form: llm
+    options:
+      - value: true
+        label:
+          en_US: "True"
+      - value: false
+        label:
+          en_US: "False"
+extra:
+  python:
+    source: tools/run_datasource_node.py

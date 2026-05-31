@@ -8,21 +8,21 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 from utils.dify_knowledge_api import DifyKnowledgeAPI
 
 
-class CreateDatasetTool(Tool):
+class UpdateDatasetTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         """
-        Create a new empty knowledge base (dataset) in Dify.
+        Update an existing knowledge base (dataset) in Dify.
         """
         # Get parameters
-        name = tool_parameters.get("name", "")
-        permission = tool_parameters.get("permission", "only_me")
+        dataset_id = tool_parameters.get("dataset_id", "")
+        name = tool_parameters.get("name")
         description = tool_parameters.get("description")
         indexing_technique = tool_parameters.get("indexing_technique")
-        provider = tool_parameters.get("provider", "vendor")
+        permission = tool_parameters.get("permission")
         embedding_model = tool_parameters.get("embedding_model")
         embedding_model_provider = tool_parameters.get("embedding_model_provider")
-        external_knowledge_api_id = tool_parameters.get("external_knowledge_api_id")
         external_knowledge_id = tool_parameters.get("external_knowledge_id")
+        external_knowledge_api_id = tool_parameters.get("external_knowledge_api_id")
 
         def parse_json_param(param_name):
             val = tool_parameters.get(param_name)
@@ -31,14 +31,15 @@ class CreateDatasetTool(Tool):
                     return json.loads(val)
                 except json.JSONDecodeError:
                     pass
-            return val if isinstance(val, dict) else None
+            return val if isinstance(val, (dict, list)) else None
 
         retrieval_model = parse_json_param("retrieval_model")
-        summary_index_setting = parse_json_param("summary_index_setting")
+        partial_member_list = parse_json_param("partial_member_list")
+        external_retrieval_model = parse_json_param("external_retrieval_model")
 
         # Validate parameters
-        if not name:
-            yield self.create_text_message("Dataset name is required.")
+        if not dataset_id:
+            yield self.create_text_message("Dataset ID is required.")
             return
 
         try:
@@ -53,26 +54,28 @@ class CreateDatasetTool(Tool):
             # Create API client
             api = DifyKnowledgeAPI(api_key, base_url)
 
-            # Create the dataset
-            result = api.create_dataset(
-                name=name, 
-                permission=permission,
+            # Update the dataset
+            result = api.update_dataset(
+                dataset_id=dataset_id,
+                name=name,
                 description=description,
                 indexing_technique=indexing_technique,
-                provider=provider,
+                permission=permission,
                 embedding_model=embedding_model,
                 embedding_model_provider=embedding_model_provider,
                 retrieval_model=retrieval_model,
-                external_knowledge_api_id=external_knowledge_api_id,
+                partial_member_list=partial_member_list,
+                external_retrieval_model=external_retrieval_model,
                 external_knowledge_id=external_knowledge_id,
-                summary_index_setting=summary_index_setting
+                external_knowledge_api_id=external_knowledge_api_id
             )
 
             # Create response
-            summary = f"Dataset '{result.get('name', name)}' created successfully with ID: {result.get('id', 'N/A')}"
+            updated_name = result.get("name", "Unknown")
+            summary = f"Dataset '{updated_name}' (ID: {dataset_id}) updated successfully."
             yield self.create_text_message(summary)
             yield self.create_json_message(result)
 
         except Exception as e:
-            yield self.create_text_message(f"Error creating dataset: {str(e)}")
+            yield self.create_text_message(f"Error updating dataset: {str(e)}")
             return

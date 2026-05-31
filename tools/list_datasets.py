@@ -1,3 +1,4 @@
+import json
 from collections.abc import Generator
 from typing import Any
 
@@ -15,6 +16,19 @@ class ListDatasetsTool(Tool):
         # Get parameters
         page = int(tool_parameters.get("page", 1))
         limit = int(tool_parameters.get("limit", 20))
+        keyword = tool_parameters.get("keyword")
+        include_all = bool(tool_parameters.get("include_all", False))
+        
+        tag_ids_raw = tool_parameters.get("tag_ids")
+        tag_ids = None
+        if tag_ids_raw:
+            if isinstance(tag_ids_raw, str):
+                try:
+                    tag_ids = json.loads(tag_ids_raw)
+                except json.JSONDecodeError:
+                    tag_ids = [t.strip() for t in tag_ids_raw.split(",")]
+            elif isinstance(tag_ids_raw, list):
+                tag_ids = tag_ids_raw
 
         try:
             # Get credentials
@@ -29,7 +43,13 @@ class ListDatasetsTool(Tool):
             api = DifyKnowledgeAPI(api_key, base_url)
 
             # List datasets
-            result = api.list_datasets(page=page, limit=limit)
+            result = api.list_datasets(
+                page=page, 
+                limit=limit,
+                keyword=keyword,
+                include_all=include_all,
+                tag_ids=tag_ids
+            )
 
             # Create response
             datasets = result.get("data", [])

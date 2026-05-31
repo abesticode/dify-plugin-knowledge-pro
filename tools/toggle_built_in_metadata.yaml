@@ -1,0 +1,44 @@
+identity:
+  name: toggle_built_in_metadata
+  author: abesticode
+  label:
+    en_US: Toggle Built-in Metadata
+    zh_Hans: 切换内置元数据
+    pt_BR: Alternar Metadados Embutidos
+    ja_JP: 組み込みメタデータ切り替え
+description:
+  human:
+    en_US: Enable or disable built-in metadata fields for the knowledge base.
+    zh_Hans: 启用或禁用知识库的内置元数据字段。
+    pt_BR: Habilitar ou desabilitar campos de metadados embutidos para a base de conhecimento.
+    ja_JP: ナレッジベースの組み込みメタデータフィールドを有効または無効にします。
+  llm: Enables or disables the system's built-in metadata fields for a specific knowledge base.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+    human_description:
+      en_US: The ID of the dataset/knowledge base
+    llm_description: The unique identifier of the knowledge base.
+    form: llm
+  - name: action
+    type: select
+    required: true
+    label:
+      en_US: Action
+    human_description:
+      en_US: Enable or disable built-in metadata fields
+    llm_description: The action to perform. 'enable' to activate, 'disable' to deactivate.
+    form: llm
+    options:
+      - value: enable
+        label:
+          en_US: Enable
+      - value: disable
+        label:
+          en_US: Disable
+extra:
+  python:
+    source: tools/toggle_built_in_metadata.py

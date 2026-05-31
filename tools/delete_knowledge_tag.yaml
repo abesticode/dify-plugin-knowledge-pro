@@ -1,0 +1,28 @@
+identity:
+  name: delete_knowledge_tag
+  author: abesticode
+  label:
+    en_US: Delete Knowledge Tag
+    zh_Hans: 删除知识库标签
+    pt_BR: Excluir Tag de Conhecimento
+    ja_JP: ナレッジタグ削除
+description:
+  human:
+    en_US: Permanently delete a knowledge base tag. Does not delete the knowledge bases that were tagged.
+    zh_Hans: 永久删除知识库标签。不会删除已被标记的知识库。
+    pt_BR: Excluir permanentemente uma tag de base de conhecimento. Não exclui as bases de conhecimento que foram marcadas.
+    ja_JP: ナレッジベースタグを完全に削除します。タグ付けされたナレッジベースは削除されません。
+  llm: Permanently deletes a tag from the workspace.
+parameters:
+  - name: tag_id
+    type: string
+    required: true
+    label:
+      en_US: Tag ID
+    human_description:
+      en_US: The ID of the tag to delete
+    llm_description: The unique identifier of the tag to delete.
+    form: llm
+extra:
+  python:
+    source: tools/delete_knowledge_tag.py

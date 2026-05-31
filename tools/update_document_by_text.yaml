@@ -1,0 +1,97 @@
+identity:
+  name: update_document_by_text
+  author: abesticode
+  label:
+    en_US: Update Document by Text
+    zh_Hans: 通过文本更新文档
+  description:
+    human:
+      en_US: Update an existing document's text content, name, or processing configuration.
+      zh_Hans: 更新现有文档的文本内容、名称或处理配置。
+    llm: Update an existing document's text content, name, or processing configuration by its document ID. Re-triggers indexing if content changes.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+    human_description:
+      en_US: The ID of the knowledge base
+    llm_description: The unique identifier (ID) of the dataset.
+    form: llm
+  - name: document_id
+    type: string
+    required: true
+    label:
+      en_US: Document ID
+    human_description:
+      en_US: The ID of the document to update
+    llm_description: The unique identifier (ID) of the document to update.
+    form: llm
+  - name: name
+    type: string
+    required: false
+    label:
+      en_US: Document Name
+    human_description:
+      en_US: New document name (required if text is provided)
+    llm_description: New document name. Required when text is provided.
+    form: llm
+  - name: text
+    type: string
+    required: false
+    label:
+      en_US: Content
+    human_description:
+      en_US: New text content
+    llm_description: New text content for the document.
+    form: llm
+  - name: doc_form
+    type: select
+    required: false
+    label:
+      en_US: Chunk Method
+    human_description:
+      en_US: Document chunking mode
+    llm_description: text_model for standard text chunking, hierarchical_model for parent-child chunk structure, qa_model for question-answer pair extraction.
+    form: llm
+    options:
+      - value: text_model
+        label:
+          en_US: Text Model
+      - value: hierarchical_model
+        label:
+          en_US: Hierarchical Model
+      - value: qa_model
+        label:
+          en_US: QA Model
+  - name: doc_language
+    type: string
+    required: false
+    label:
+      en_US: Document Language
+    human_description:
+      en_US: Language of the document
+    llm_description: Language of the document for processing optimization.
+    form: llm
+  - name: process_rule
+    type: string
+    required: false
+    label:
+      en_US: Process Rule JSON
+    human_description:
+      en_US: JSON configuration for chunking rules
+    llm_description: JSON string defining chunking rules.
+    form: llm
+  - name: retrieval_model
+    type: string
+    required: false
+    label:
+      en_US: Retrieval Model Config
+    human_description:
+      en_US: JSON string for retrieval model configuration
+    llm_description: JSON string for retrieval model configuration.
+    form: llm
+extra:
+  python:
+    source: tools/update_document_by_text.py

@@ -1,0 +1,44 @@
+identity:
+  name: list_datasource_plugins
+  author: abesticode
+  label:
+    en_US: List Datasource Plugins
+    zh_Hans: 列出数据源插件
+    pt_BR: Listar Plugins de Fonte de Dados
+    ja_JP: データソースプラグイン一覧
+description:
+  human:
+    en_US: List the datasource nodes configured in the knowledge pipeline.
+    zh_Hans: 列出知识库Pipeline中配置的数据源节点。
+    pt_BR: Listar os nós de fonte de dados configurados no pipeline de conhecimento.
+    ja_JP: ナレッジパイプラインで設定されているデータソースノードのリストを取得します。
+  llm: Retrieves a list of configured datasource nodes in a dataset's pipeline. Useful for finding the node_id and required user_input_variables.
+parameters:
+  - name: dataset_id
+    type: string
+    required: true
+    label:
+      en_US: Dataset ID
+    human_description:
+      en_US: The ID of the dataset/knowledge base
+    llm_description: The unique identifier of the knowledge base.
+    form: llm
+  - name: is_published
+    type: select
+    required: false
+    label:
+      en_US: Is Published
+    human_description:
+      en_US: Retrieve from published version (true) or draft version (false)
+    llm_description: Whether to retrieve nodes from the published or draft pipeline. Default is true.
+    form: llm
+    options:
+      - value: true
+        label:
+          en_US: "True"
+      - value: false
+        label:
+          en_US: "False"
+extra:
+  python:
+    source: tools/list_datasource_plugins.py

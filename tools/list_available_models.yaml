@@ -1,0 +1,47 @@
+identity:
+  name: list_available_models
+  author: abesticode
+  label:
+    en_US: List Available Models
+    zh_Hans: 列出可用模型
+    pt_BR: Listar Modelos Disponíveis
+    ja_JP: 利用可能なモデル一覧
+description:
+  human:
+    en_US: Retrieve the list of available models by type (e.g. text-embedding, rerank) in the workspace.
+    zh_Hans: 按类型（如 text-embedding, rerank）检索工作空间中可用模型的列表。
+    pt_BR: Recupera a lista de modelos disponíveis por tipo (por exemplo, text-embedding, rerank) no workspace.
+    ja_JP: ワークスペース内の種類（text-embedding、rerankなど）ごとに利用可能なモデルのリストを取得します。
+  llm: Retrieves a list of available models in the workspace filtered by the specified model type (e.g. text-embedding, rerank). Useful to discover which models can be used before creating a dataset.
+parameters:
+  - name: model_type
+    type: select
+    required: true
+    label:
+      en_US: Model Type
+    human_description:
+      en_US: Type of model to retrieve
+    llm_description: Type of model to retrieve. For knowledge base configuration, use text-embedding for embedding models or rerank for reranking models.
+    form: llm
+    options:
+      - value: text-embedding
+        label:
+          en_US: Text Embedding
+      - value: rerank
+        label:
+          en_US: Rerank
+      - value: llm
+        label:
+          en_US: LLM
+      - value: tts
+        label:
+          en_US: TTS
+      - value: speech2text
+        label:
+          en_US: Speech2Text
+      - value: moderation
+        label:
+          en_US: Moderation
+extra:
+  python:
+    source: tools/list_available_models.py

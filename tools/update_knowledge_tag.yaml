@@ -1,0 +1,37 @@
+identity:
+  name: update_knowledge_tag
+  author: abesticode
+  label:
+    en_US: Update Knowledge Tag
+    zh_Hans: 更新知识库标签
+    pt_BR: Atualizar Tag de Conhecimento
+    ja_JP: ナレッジタグ更新
+description:
+  human:
+    en_US: Rename an existing knowledge base tag.
+    zh_Hans: 重命名现有的知识库标签。
+    pt_BR: Renomear uma tag de base de conhecimento existente.
+    ja_JP: 既存のナレッジベースタグの名前を変更します。
+  llm: Renames an existing tag in the workspace.
+parameters:
+  - name: tag_id
+    type: string
+    required: true
+    label:
+      en_US: Tag ID
+    human_description:
+      en_US: The ID of the tag to update
+    llm_description: The unique identifier of the tag to update.
+    form: llm
+  - name: name
+    type: string
+    required: true
+    label:
+      en_US: New Tag Name
+    human_description:
+      en_US: The new name for the tag (1-50 characters)
+    llm_description: The new name for the tag.
+    form: llm
+extra:
+  python:
+    source: tools/update_knowledge_tag.py

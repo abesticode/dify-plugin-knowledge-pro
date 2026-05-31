@@ -1,0 +1,37 @@
+identity:
+  name: bind_knowledge_tags
+  author: abesticode
+  label:
+    en_US: Bind Knowledge Tags
+    zh_Hans: 绑定知识库标签
+    pt_BR: Vincular Tags de Conhecimento
+    ja_JP: ナレッジタグバインド
+description:
+  human:
+    en_US: Bind one or more tags to a knowledge base.
+    zh_Hans: 将一个或多个标签绑定到知识库。
+    pt_BR: Vincular uma ou mais tags a uma base de conhecimento.
+    ja_JP: ナレッジベースに1つ以上のタグをバインドします。
+  llm: Binds one or more existing tags to a knowledge base/dataset.
+parameters:
+  - name: target_id
+    type: string
+    required: true
+    label:
+      en_US: Target ID (Dataset)
+    human_description:
+      en_US: The ID of the dataset/knowledge base
+    llm_description: The unique identifier of the target knowledge base.
+    form: llm
+  - name: tag_ids
+    type: string
+    required: true
+    label:
+      en_US: Tag IDs
+    human_description:
+      en_US: JSON array or comma-separated list of tag IDs to bind
+    llm_description: JSON array or comma-separated list of tag IDs to bind.
+    form: llm
+extra:
+  python:
+    source: tools/bind_knowledge_tags.py

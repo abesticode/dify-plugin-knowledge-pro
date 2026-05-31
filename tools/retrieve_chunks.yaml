@@ -132,6 +132,24 @@ parameters:
       ja_JP: 結果の最小スコア閾値（0-1）
     llm_description: The minimum score threshold for results. Only used if score_threshold_enabled is true. Value should be between 0 and 1.
     form: llm
+  - name: external_retrieval_model
+    type: string
+    required: false
+    label:
+      en_US: External Retrieval Model
+    human_description:
+      en_US: JSON string for external retrieval model configuration
+    llm_description: JSON string for external retrieval model configuration (only for external knowledge bases).
+    form: llm
+  - name: attachment_ids
+    type: string
+    required: false
+    label:
+      en_US: Attachment IDs
+    human_description:
+      en_US: Filter by attachment IDs (comma-separated or JSON array)
+    llm_description: List of attachment IDs to include in the retrieval context. Provide a JSON array of strings, or a comma-separated list of IDs.
+    form: llm
 extra:
   python:
     source: tools/retrieve_chunks.py

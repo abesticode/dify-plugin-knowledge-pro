@@ -1,0 +1,37 @@
+identity:
+  name: unbind_knowledge_tags
+  author: abesticode
+  label:
+    en_US: Unbind Knowledge Tags
+    zh_Hans: 解绑知识库标签
+    pt_BR: Desvincular Tags de Conhecimento
+    ja_JP: ナレッジタグアンバインド
+description:
+  human:
+    en_US: Remove one or more tags from a knowledge base.
+    zh_Hans: 从知识库中移除一个或多个标签。
+    pt_BR: Remover uma ou mais tags de uma base de conhecimento.
+    ja_JP: ナレッジベースから1つ以上のタグを削除します。
+  llm: Unbinds (removes) one or more tags from a specific knowledge base/dataset.
+parameters:
+  - name: target_id
+    type: string
+    required: true
+    label:
+      en_US: Target ID (Dataset)
+    human_description:
+      en_US: The ID of the dataset/knowledge base
+    llm_description: The unique identifier of the target knowledge base.
+    form: llm
+  - name: tag_ids
+    type: string
+    required: true
+    label:
+      en_US: Tag IDs
+    human_description:
+      en_US: JSON array or comma-separated list of tag IDs to unbind
+    llm_description: JSON array or comma-separated list of tag IDs to unbind.
+    form: llm
+extra:
+  python:
+    source: tools/unbind_knowledge_tags.py

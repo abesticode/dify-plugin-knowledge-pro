@@ -59,6 +59,40 @@ parameters:
       ja_JP: 更新するチャンク/セグメントのID
     llm_description: The unique identifier (ID) of the chunk/segment to update. Use list_chunks to get available segment IDs.
     form: llm
+  - name: regenerate_child_chunks
+    type: select
+    required: false
+    label:
+      en_US: Regenerate Child Chunks
+    human_description:
+      en_US: Whether to regenerate child chunks
+    llm_description: Whether to regenerate child chunks. true or false.
+    form: llm
+    options:
+      - value: true
+        label:
+          en_US: "True"
+      - value: false
+        label:
+          en_US: "False"
+  - name: attachment_ids
+    type: string
+    required: false
+    label:
+      en_US: Attachment IDs
+    human_description:
+      en_US: JSON array or comma-separated list of attachment file IDs
+    llm_description: Optional JSON array or comma-separated list of attachment file IDs.
+    form: llm
+  - name: summary
+    type: string
+    required: false
+    label:
+      en_US: Summary
+    human_description:
+      en_US: Summary content for summary index
+    llm_description: Summary content for summary index.
+    form: llm
   - name: content
     type: string
     required: false

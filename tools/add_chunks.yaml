@@ -87,7 +87,16 @@ parameters:
       zh_Hans: 分块的关键词，用逗号分隔（可选）
       pt_BR: Palavras-chave separadas por vírgula para o chunk (opcional)
       ja_JP: チャンクのキーワード、カンマ区切り（オプション）
-    llm_description: Optional comma-separated keywords for the chunk to improve search relevance.
+    llm_description: Optional comma-separated list of keywords. E.g., 'ai, machine learning'.
+    form: llm
+  - name: attachment_ids
+    type: string
+    required: false
+    label:
+      en_US: Attachment IDs
+    human_description:
+      en_US: JSON array or comma-separated list of attachment file IDs
+    llm_description: Optional JSON array or comma-separated list of attachment file IDs.
     form: llm
 extra:
   python:

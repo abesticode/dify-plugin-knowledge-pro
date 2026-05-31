@@ -1,0 +1,19 @@
+identity:
+  name: list_knowledge_tags
+  author: abesticode
+  label:
+    en_US: List Knowledge Tags
+    zh_Hans: 列出知识库标签
+    pt_BR: Listar Tags de Conhecimento
+    ja_JP: ナレッジタグ一覧
+description:
+  human:
+    en_US: Returns the list of all knowledge base tags in the workspace.
+    zh_Hans: 返回工作空间中所有知识库标签的列表。
+    pt_BR: Retorna a lista de todas as tags de base de conhecimento no workspace.
+    ja_JP: ワークスペース内のすべてのナレッジベースタグのリストを返します。
+  llm: Retrieves a list of all knowledge base tags in the entire workspace. This does not require a specific dataset ID.
+parameters: []
+extra:
+  python:
+    source: tools/list_knowledge_tags.py

@@ -1,3 +1,4 @@
+import json
 from collections.abc import Generator
 from typing import Any
 
@@ -19,6 +20,25 @@ class RetrieveChunksTool(Tool):
         top_k = int(tool_parameters.get("top_k", 5))
         score_threshold_enabled = tool_parameters.get("score_threshold_enabled", False)
         score_threshold = tool_parameters.get("score_threshold")
+        
+        external_retrieval_model_raw = tool_parameters.get("external_retrieval_model")
+        external_retrieval_model = None
+        if external_retrieval_model_raw and isinstance(external_retrieval_model_raw, str):
+            try:
+                external_retrieval_model = json.loads(external_retrieval_model_raw)
+            except json.JSONDecodeError:
+                pass
+        
+        attachment_ids_raw = tool_parameters.get("attachment_ids")
+        attachment_ids = None
+        if attachment_ids_raw:
+            if isinstance(attachment_ids_raw, str):
+                try:
+                    attachment_ids = json.loads(attachment_ids_raw)
+                except json.JSONDecodeError:
+                    attachment_ids = [a.strip() for a in attachment_ids_raw.split(",")]
+            elif isinstance(attachment_ids_raw, list):
+                attachment_ids = attachment_ids_raw
 
         # Validate parameters
         if not dataset_id:
@@ -47,12 +67,26 @@ class RetrieveChunksTool(Tool):
                 search_method=search_method,
                 top_k=top_k,
                 score_threshold_enabled=score_threshold_enabled,
-                score_threshold=float(score_threshold) if score_threshold else None
+                score_threshold=float(score_threshold) if score_threshold else None,
+                external_retrieval_model=external_retrieval_model,
+                attachment_ids=attachment_ids
             )
+
+            # Check if result is a string (e.g., due to double JSON encoding)
+            if isinstance(result, str):
+                try:
+                    result = json.loads(result)
+                except json.JSONDecodeError:
+                    yield self.create_text_message(f"API returned an unexpected string: {result}")
+                    return
 
             # Create response
             records = result.get("records", [])
-            query_content = result.get("query", {}).get("content", query)
+            raw_query = result.get("query", query)
+            if isinstance(raw_query, dict):
+                query_content = raw_query.get("content", query)
+            else:
+                query_content = raw_query if raw_query else query
 
             if not records:
                 yield self.create_text_message(f"No matching chunks found for query: '{query_content}'")
